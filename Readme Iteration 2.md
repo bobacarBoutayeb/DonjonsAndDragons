@@ -20,9 +20,7 @@ Compétences
 
 **ITÉRATION 2**
 
-Création des personnages et du
-
-plateau de jeu
+Création des personnages et du plateau de jeu
 
 Modalité
 
@@ -31,12 +29,18 @@ Modalité
 
 **1 — Structure du jeu et création de personnages**
 
-Nous allons manipuler deux types de personnages : **guerrier** et **magicien** (pour le moment une seule classe, avec un attribut de type string qui vaudra “guerrier” ou “magicien”) et leur équipement par défaut (arme ou sort). Le **guerrier** possède une arme et peut être équipé d’un bouclier pour se défendre. Le **magicien** possède un sort et peut avoir un philtre pour se défendre. Chaque type de personnage est caractérisé par les attributs suivants :
+Nous allons manipuler deux types de personnages : **guerrier** et **magicien** (pour le moment une seule classe, avec un attribut de type string qui vaudra “guerrier” ou “magicien”) et leur équipement par défaut (arme ou sort).
+
+Le **guerrier** possède une arme et peut être équipé d’un bouclier pour se défendre.
+
+Le **magicien** possède un sort et peut avoir un philtre pour se défendre.
+
+Chaque type de personnage est caractérisé par les attributs suivants :
 
 - *Guerrier*:  Nom, Niveau de vie (5-10), Force d’attaque (5-10),  Arme, Bouclier
 - *Magicien* : Nom, Niveau de vie (3-6), Force d’attaque (8-15), Sort, Philtre
 
-Le programme commence par vous proposer **un premiermenu**:
+Le programme commence par vous proposer **un premier menu**:
 
 - **Nouveau personnage ou quitter le jeu**:
 - Création du personnage : le programme va demander queltype de personnage vous voulez créer, puis vous demande les informations adéquates pour créer ce personnage, avec la saisie via lecture des entrées clavier (classe [Scanner)](https://www.w3schools.com/java/java_user_input.asp), des informations du personnage (Guerrier ou Magicien).
@@ -50,9 +54,7 @@ CONSEILS DE DÉVELOPPEMENT
 - Choisissez avec attention les types de variables permettant de représenter les attributs des personnages. Les armes et sorts sont caractérisés par un nom, et un niveau d’attaque.
 - Commencez à architecturer votre code correctement en utilisant des classes :
 - Une classe « Personnage » qui aura 3 constructeurs (sans paramètres, avec nom, et avec nom/niveau de vie/force d’attaque)
-- Une classe « Menu » qui vous permettra de structurer correctement le déroulement
-
-du jeu et les messages pour l’utilisateur en utilisant des fonctions.
+- Une classe « Menu » qui vous permettra de structurer correctement le déroulement du jeu et les messages pour l’utilisateur en utilisant des fonctions.
 
 - Une classe « Game » qui contiendra la logique interne du jeu ( joueurs, avancement )
 - **Attention!!** Toutes vos classes devront être structurées correctement (Getters/Setters, constructeurs, méthode toString(), ...).
