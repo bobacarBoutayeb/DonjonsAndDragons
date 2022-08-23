@@ -21,6 +21,18 @@ public class Menu {
 
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
+/*
+
+        try{
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Please choose a name: ");
+            String userInput = sc.nextLine();
+            player.setName(userInput);
+            initializedGameMenu(player);
+        } catch (InputMismatchException e){
+            System.out.println("NOK");
+            setPlayerName(player);
+        }*/
 
         switch (input) {
             case 1 -> generatePlayer();
