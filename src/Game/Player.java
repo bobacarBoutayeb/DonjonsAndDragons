@@ -1,10 +1,12 @@
 package Game;
 
+/* Array mode
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
-
+*/
 public class Player {
+
+    //Attributs
     private String name;
     private int health;
     private int attack;
@@ -12,27 +14,57 @@ public class Player {
     private int minHealthWizard = 8;
     private int maxHealthWizard = 15;
     private int maxHealthWarrior = 15;
+
+    private EquipmentOffensive atkStuff;
+    private EquipmentDefensive defStuff;
+
+    private String type;
     public static String[] typePlayer =  {"warrior", "wizard"};
     /* Approche ArrayList
     public static ArrayList<String> typePlayer = new ArrayList<>();
     */
+
+    //Constructs
     public Player(){
         /* ArrayList
         typePlayer.add("guerrier");
         typePlayer.add("magicien");
         */
+        this.atkStuff = new EquipmentOffensive("cool",10);
+        this.defStuff = new EquipmentDefensive("protector", 10);
     }
 
-    public Player(String nameChoosed)
+    public Player(String nameAssigned)
     {
-        this.name = nameChoosed;
+        this.name = nameAssigned;
+        this.atkStuff = new EquipmentOffensive("cool",10);
+        this.defStuff = new EquipmentDefensive("protector", 10);
     }
     public Player(String nameAssigned, int healthAssigned, int attackAssigned)
     {
         this.name = nameAssigned;
         this.health = healthAssigned;
         this.attack = attackAssigned;
+        this.atkStuff = new EquipmentOffensive("cool",10);
+        this.defStuff = new EquipmentDefensive("protector", 10);
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", attack=" + attack +
+                ", minHealthWarrior=" + minHealthWarrior +
+                ", minHealthWizard=" + minHealthWizard +
+                ", maxHealthWizard=" + maxHealthWizard +
+                ", maxHealthWarrior=" + maxHealthWarrior +
+                ", atkStuff=" + atkStuff +
+                ", defStuff=" + defStuff +
+                '}';
+    }
+
+    // Getters & Setters
     public int getHealth() {
         return health;
     }
@@ -70,4 +102,14 @@ public class Player {
     public void setMaxHealthWarrior(int maxHealthWarrior) {
         this.maxHealthWarrior = maxHealthWarrior;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    // Methods
 }

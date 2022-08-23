@@ -1,14 +1,12 @@
 package Game;
-import java.lang.reflect.AnnotatedArrayType;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
-import java.util.List;
 
 public class Menu {
 
     // Nouveau perso
-    public Player playerChoice(){
+    public Player generatePlayer(){
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Please choose a class: ");
@@ -25,6 +23,7 @@ public class Menu {
         if (choice.equals("warrior")){
 
             Player warrior = new Player();
+            warrior.setType(choice);
             Random rn = new Random();
             warrior.setHealth(rn.nextInt(warrior.getMaxHealthWarrior() - warrior.getMinHealthWarrior() + 1) + warrior.getMinHealthWarrior());
 
@@ -32,6 +31,7 @@ public class Menu {
         } else {
 
             Player wizard = new Player();
+            wizard.setType(choice);
             Random rn = new Random();
             wizard.setHealth(rn.nextInt(wizard.getMaxHealthWarrior() - wizard.getMinHealthWarrior() + 1) + wizard.getMinHealthWarrior());
 
@@ -41,7 +41,14 @@ public class Menu {
 
     // Afficher info perso
 
+
+
     // Les modifier
+
+    public void setPlayerName(Player player)
+    {
+
+    }
 
     // Quitter le jeu
 
