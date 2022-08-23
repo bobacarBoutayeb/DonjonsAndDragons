@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 */
 public class Player {
-
     //Attributs
     private String name;
     private int health;
@@ -65,6 +64,20 @@ public class Player {
     }
 
     // Getters & Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
     public int getHealth() {
         return health;
     }
