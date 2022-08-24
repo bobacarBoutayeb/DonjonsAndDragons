@@ -1,9 +1,4 @@
 package Game;
-
-/* Array mode
-import java.util.ArrayList;
-import java.util.Arrays;
-*/
 public class Player {
     //Attributs
     private String name;
@@ -125,4 +120,5 @@ public class Player {
     }
 
     // Methods
+
 }
