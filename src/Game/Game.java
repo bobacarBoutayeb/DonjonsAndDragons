@@ -13,7 +13,7 @@ public class Game {
     }
 
     /* Start Game */
-    public void startGame(Menu menu){
+    public void startGame(){
         this.menu.showFirstMenu();
     }
     public void startSettingGame(Player player){
