@@ -1,37 +1,18 @@
 package Game;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Arrays;
 
-public class Menu {
-    Scanner sc = new Scanner(System.in);
-//    Game game = new Game();
-    public String getValidChoice (String[] options) {
-        System.out.println();
-        System.out.println("*** Enter your choice: ***");
-        String choice = this.sc.nextLine();
-        while (!Arrays.asList(options).contains(choice)){
-            System.out.println();
-            System.out.println("That's not a valid choice");
-            System.out.println("*** Please choose a correct one: ***");
-            choice = this.sc.nextLine().toLowerCase();
-        }
-        return choice;
+public class MenuInteractions {
+
+    public MenuInteractions(Menu menu, Game game) {
+        menu = new Menu();
+        game = new Game();
     }
-    // Interface
 
-    /* Main menu */
-    public void showFirstMenu() {
-        System.out.println("Welcome to my Dungeons & Dragons game that sink !");
-        System.out.println();
-        System.out.println("****************************");
-        System.out.println("* Please choose an action: *");
-        System.out.println("****************************");
         System.out.println("1 - New Game");
         System.out.println("2 - Quit game");
-
-        String choice = getValidChoice(new String[]{"1", "2"});
 
         switch (choice) {
             case "1" -> generatePlayer();
@@ -40,36 +21,29 @@ public class Menu {
     }
 
     /* Nouveau perso */
-    public void generatePlayer()
-    {
-        System.out.println();
-        System.out.println("**************************");
-        System.out.println("* Please choose a class: *");
-        System.out.println("**************************");
+
         System.out.println("1 - Warrior");
         System.out.println("2 - Wizard");
-        String choice = getValidChoice(new String[]{"1", "2"});
+
         System.out.println("Choosed class: " + choice);
+
         Player player = new Player();
         player.setType(choice);
+
         Random rn = new Random();
         player.setHealth(rn.nextInt(player.getMaxHealthWarrior() - player.getMinHealthWarrior() + 1) + player.getMinHealthWarrior());
+
+
         setPlayerName(player);
     }
 
     /* Initialized Game Menu */
-    public void initializedGameMenu(Player player)
-    {
-        System.out.println("***********************");
-        System.out.println("* Choose your action: *");
-        System.out.println("***********************");
+
         System.out.println("1 - Start the game");
         System.out.println("2 - Show player's stats");
         System.out.println("3 - Modify player's stats");
         System.out.println("4 - Restart a new game");
         System.out.println("5 - Quit game");
-
-        String choice = getValidChoice(new String[]{"1", "2", "3", "4", "5"});
 
         switch (choice) {
 //            case "1" -> this.game.startSettingGame(player);
@@ -82,18 +56,11 @@ public class Menu {
 
     /* Already started Game Menu */
 
-    public void alreadyStartedGameMenu(Player player)
-    {
-        System.out.println("***********************");
-        System.out.println("* Choose your action: *");
-        System.out.println("***********************");
         System.out.println("1 - Roll the dice to continue the game");
         System.out.println("2 - Show player's stats");
         System.out.println("3 - Modify player's stats");
         System.out.println("4 - Restart a new game");
         System.out.println("5 - Quit game");
-
-        String choice = getValidChoice(new String[]{"1", "2", "3", "4", "5"});
 
         switch (choice) {
 //            case "1" -> this.game.rollingDiceForMoving(player);
@@ -105,17 +72,11 @@ public class Menu {
     }
 
     /* Afficher info perso  */
-    public void playerStatsMenu(Player player)
-    {
-        System.out.println("****************************");
-        System.out.println("* Show player information: *");
-        System.out.println("****************************");
+
         System.out.println("1 - Name");
         System.out.println("2 - Health");
         System.out.println("3 - Attack");
         System.out.println("4 - Go back to main menu");
-
-        String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
 
         switch (choice) {
             case "1" -> {
@@ -150,8 +111,6 @@ public class Menu {
     /* Les modifier */
 
     /* Afficher info perso  */
-    public void playerStatsMenuModify(Player player)
-    {
         System.out.println("******************************");
         System.out.println("* Modify player information: *");
         System.out.println("******************************");
@@ -159,8 +118,6 @@ public class Menu {
         System.out.println("2 - Health");
         System.out.println("3 - Attack");
         System.out.println("4 - Go back to main menu");
-
-        String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
 
         switch (choice) {
             case "1" -> {
