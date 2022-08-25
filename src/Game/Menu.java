@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class Menu {
     Scanner sc = new Scanner(System.in);
+    Game game = new Game();
     public String getValidChoice (String[] options) {
         System.out.println();
         System.out.println("*** Enter your choice: ***");
@@ -62,18 +63,44 @@ public class Menu {
         System.out.println("***********************");
         System.out.println("* Choose your action: *");
         System.out.println("***********************");
-        System.out.println("1 - Show player's stats");
-        System.out.println("2 - Modify player's stats");
-        System.out.println("3 - Restart a new game");
-        System.out.println("4 - Quit game");
+        System.out.println("1 - Start the game");
+        System.out.println("2 - Show player's stats");
+        System.out.println("3 - Modify player's stats");
+        System.out.println("4 - Restart a new game");
+        System.out.println("5 - Quit game");
 
         String choice = getValidChoice(new String[]{"1", "2", "3", "4"});
 
         switch (choice) {
-            case "1" -> playerStatsMenu(player);
-            case "2" -> playerStatsMenuModify(player);
-            case "3" -> showFirstMenu();
-            case "4" -> quitGame();
+            case "1" -> this.game.startGame(player);
+            case "2" -> playerStatsMenu(player);
+            case "3" -> playerStatsMenuModify(player);
+            case "4" -> showFirstMenu();
+            case "5" -> quitGame();
+        }
+    }
+
+    /* Already started Game Menu */
+
+    public void alreadyStartedGameMenu(Player player)
+    {
+        System.out.println("***********************");
+        System.out.println("* Choose your action: *");
+        System.out.println("***********************");
+        System.out.println("1 - Roll the dice to continue the game");
+        System.out.println("2 - Show player's stats");
+        System.out.println("3 - Modify player's stats");
+        System.out.println("4 - Restart a new game");
+        System.out.println("5 - Quit game");
+
+        String choice = getValidChoice(new String[]{"1", "2", "3", "4"});
+
+        switch (choice) {
+            case "1" -> this.game.rollingDiceForMoving(player);
+            case "2" -> playerStatsMenu(player);
+            case "3" -> playerStatsMenuModify(player);
+            case "4" -> showFirstMenu();
+            case "5" -> quitGame();
         }
     }
 

@@ -8,6 +8,7 @@ public class Player {
     private int minHealthWizard = 8;
     private int maxHealthWizard = 15;
     private int maxHealthWarrior = 15;
+    private int position = 0;
 
     private EquipmentOffensive atkStuff;
     private EquipmentDefensive defStuff;
@@ -117,6 +118,14 @@ public class Player {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     // Methods
