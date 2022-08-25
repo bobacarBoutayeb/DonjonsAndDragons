@@ -7,11 +7,13 @@ import java.util.Arrays;
 public class Menu {
     Scanner sc = new Scanner(System.in);
     public String getValidChoice (String[] options) {
-        System.out.println("Enter choice:");
+        System.out.println();
+        System.out.println("*** Enter your choice: ***");
         String choice = this.sc.nextLine();
         while (!Arrays.asList(options).contains(choice)){
+            System.out.println();
             System.out.println("That's not a valid choice");
-            System.out.println("Please choose a correct one:");
+            System.out.println("*** Please choose a correct one: ***");
             choice = this.sc.nextLine().toLowerCase();
         }
         return choice;
@@ -21,7 +23,10 @@ public class Menu {
     /* Main menu */
     public void showFirstMenu() {
         System.out.println("Welcome to my Dungeons & Dragons game that sink !");
-        System.out.println("Please choose an action :");
+        System.out.println();
+        System.out.println("****************************");
+        System.out.println("* Please choose an action: *");
+        System.out.println("****************************");
         System.out.println("1 - New Game");
         System.out.println("2 - Quit game");
 
@@ -36,7 +41,12 @@ public class Menu {
     /* Nouveau perso */
     public void generatePlayer()
     {
-        System.out.println("Please choose a class: \n1 - Warrior\n2 - Wizard");
+        System.out.println();
+        System.out.println("**************************");
+        System.out.println("* Please choose a class: *");
+        System.out.println("**************************");
+        System.out.println("1 - Warrior");
+        System.out.println("2 - Wizard");
         String choice = getValidChoice(new String[]{"1", "2"});
         System.out.println("Choosed class: " + choice);
         Player player = new Player();
@@ -49,7 +59,9 @@ public class Menu {
     /* Initialized Game Menu */
     public void initializedGameMenu(Player player)
     {
-        System.out.println("Choose your action: ");
+        System.out.println("***********************");
+        System.out.println("* Choose your action: *");
+        System.out.println("***********************");
         System.out.println("1 - Show player's stats");
         System.out.println("2 - Modify player's stats");
         System.out.println("3 - Restart a new game");
@@ -68,7 +80,9 @@ public class Menu {
     /* Afficher info perso  */
     public void playerStatsMenu(Player player)
     {
-        System.out.println("Show player information: ");
+        System.out.println("****************************");
+        System.out.println("* Show player information: *");
+        System.out.println("****************************");
         System.out.println("1 - Name");
         System.out.println("2 - Health");
         System.out.println("3 - Attack");
@@ -111,7 +125,9 @@ public class Menu {
     /* Afficher info perso  */
     public void playerStatsMenuModify(Player player)
     {
-        System.out.println("Modify player information: ");
+        System.out.println("******************************");
+        System.out.println("* Modify player information: *");
+        System.out.println("******************************");
         System.out.println("1 - Name");
         System.out.println("2 - Health");
         System.out.println("3 - Attack");
@@ -139,7 +155,7 @@ public class Menu {
     {
         int choice2;
         do {
-            System.out.println("How much HP you want to set for this player ?");
+            System.out.println("*** How much HP you want to set for this player? ***");
             while (!this.sc.hasNextInt()) {
                 System.out.println("That's not number");
                 this.sc.next();
@@ -147,7 +163,7 @@ public class Menu {
             choice2 = this.sc.nextInt();
 
             if (choice2 <= 0) {
-                System.out.println("HP must be a positive value");
+                System.out.println("*** HP must be a positive value ***");
             }
         } while (choice2 <= 0);
         player.setHealth(choice2);
@@ -157,7 +173,7 @@ public class Menu {
     {
         int choice;
         do {
-            System.out.println("How much ATK you want to set for this player ?");
+            System.out.println("*** How much ATK you want to set for this player? ***");
             while (!this.sc.hasNextInt()) { //Check int
                 System.out.println("That's not number");
                 this.sc.next();
@@ -174,13 +190,11 @@ public class Menu {
 
     public void setPlayerName(Player player)
     {
-        System.out.println("Please choose a name: ");
+        System.out.println("*** Please choose a name: ***");
         String userInput = this.sc.nextLine();
         player.setName(userInput);
         initializedGameMenu(player);
     }
-
-
 
     /* Quitter le jeu */
     public void quitGame()
