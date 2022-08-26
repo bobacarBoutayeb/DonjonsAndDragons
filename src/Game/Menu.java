@@ -1,11 +1,33 @@
 package Game;
 
-public class Menu implements Validation{
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Menu {
+    Scanner sc = new Scanner(System.in);
+    private String ChoiceInputPrompted(){
+        System.out.println("""
+                
+                *** Enter your choice: ***
+                """);
+        return this.sc.nextLine().toLowerCase();
+    }
+    private String getValidChoice (String[] options) {
+        String choice = ChoiceInputPrompted();
+        while (!Arrays.asList(options).contains(choice)){
+            System.out.println("""
+                    
+                    That's not a valid choice
+                    
+                    *** Please choose a correct one: ***
+                    """);
+            ChoiceInputPrompted();
+        }
+        return choice;
+    }
 
     // Interface
-
-    /* Main menu */
-    public String showFirstMenu() {
+    public String welcomeMenu() {
         System.out.println("""
                 Welcome to my Dungeons & Dragons game that sink !
                 
@@ -23,8 +45,6 @@ public class Menu implements Validation{
             case "2" -> quitGame();
         }*/
     }
-
-    /* Initialized Game Menu */
     public String initializedGameMenu()
     {
         System.out.println("""
@@ -76,6 +96,9 @@ public class Menu implements Validation{
         }
          */
     }
+    public void startGame(){
+        System.out.println("Let the game begin!");
+    }
     public String generatePlayer() {
         System.out.println("""
                 **************************
@@ -86,6 +109,10 @@ public class Menu implements Validation{
                 """);
 
         return getValidChoice(new String[]{"1", "2"});
+    }
+
+    public void displayClass(String choice){
+        System.out.println("Choosed class: " + choice);
     }
     public String getPlayerName() {
         System.out.println("*** Please choose a name: ***");
@@ -202,5 +229,9 @@ public class Menu implements Validation{
         } while (choice <= 0);
         player.setAttack(choice);
         this.sc.nextLine(); // clear buffer
+    }
+
+    public void showRolledDice(int diceRolled) {
+        System.out.println("Dice roll :" + diceRolled);
     }
 }

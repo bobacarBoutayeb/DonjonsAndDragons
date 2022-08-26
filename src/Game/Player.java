@@ -2,7 +2,7 @@ package Game;
 
 import java.util.Random;
 
-public class Player implements Validation {
+public class Player {
     //Attributs
     private String name;
     private int health;
@@ -21,9 +21,8 @@ public class Player implements Validation {
     /* Approche ArrayList
     public static ArrayList<String> typePlayer = new ArrayList<>();
     */
-
     //Constructs
-    public Player(){
+    public Player() {
         /* ArrayList
         typePlayer.add("guerrier");
         typePlayer.add("magicien");
@@ -32,16 +31,13 @@ public class Player implements Validation {
         this.atkStuff = new EquipmentOffensive("cool",10);
         this.defStuff = new EquipmentDefensive("protector", 10);
     }
-
-    public Player(String nameAssigned)
-    {
+    public Player(String nameAssigned) {
         this.menu = new Menu();
         this.name = nameAssigned;
         this.atkStuff = new EquipmentOffensive("cool",10);
         this.defStuff = new EquipmentDefensive("protector", 10);
     }
-    public Player(String nameAssigned, int healthAssigned, int attackAssigned)
-    {
+    public Player(String nameAssigned, int healthAssigned, int attackAssigned) {
         this.menu = new Menu();
         this.name = nameAssigned;
         this.health = healthAssigned;
@@ -49,7 +45,6 @@ public class Player implements Validation {
         this.atkStuff = new EquipmentOffensive("cool",10);
         this.defStuff = new EquipmentDefensive("protector", 10);
     }
-
     @Override
     public String toString() {
         return "Player{" +
@@ -65,34 +60,28 @@ public class Player implements Validation {
                 '}';
     }
 
-
     // Methods
-    public void generatePlayer()
-    {
+
+    public Player createPlayer(Player player) {
         String choice = this.menu.generatePlayer();
-        System.out.println("Choosed class: " + choice);
-        Player player = new Player();
+        this.menu.displayClass(choice);
         player.setType(choice);
         Random rn = new Random();
         player.setHealth(rn.nextInt(player.getMaxHealthWarrior() - player.getMinHealthWarrior() + 1) + player.getMinHealthWarrior());
-        setPlayerName(player);
+        player.setPlayerName();
+        return player;
     }
-    public void setPlayerName(Player player)
-    {
-        String choosedName = this.menu.getPlayerName();
-        player.setName(choosedName);
-        //initializedGameMenu();
+    public void setPlayerName() {
+        this.setName(this.menu.getPlayerName());
     }
 
     // Getters & Setters
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public int getAttack() {
         return attack;
     }
@@ -108,43 +97,33 @@ public class Player implements Validation {
     public int getMinHealthWarrior() {
         return minHealthWarrior;
     }
-
     public void setMinHealthWarrior(int minHealthWarrior) {
         this.minHealthWarrior = minHealthWarrior;
     }
-
     public int getMinHealthWizard() {
         return minHealthWizard;
     }
-
     public void setMinHealthWizard(int minHealthWizard) {
         this.minHealthWizard = minHealthWizard;
     }
-
     public int getMaxHealthWizard() {
         return maxHealthWizard;
     }
-
     public void setMaxHealthWizard(int maxHealthWizard) {
         this.maxHealthWizard = maxHealthWizard;
     }
-
     public int getMaxHealthWarrior() {
         return maxHealthWarrior;
     }
-
     public void setMaxHealthWarrior(int maxHealthWarrior) {
         this.maxHealthWarrior = maxHealthWarrior;
     }
-
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
     public int getPosition() {
         return position;
     }
