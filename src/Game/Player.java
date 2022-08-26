@@ -1,5 +1,8 @@
 package Game;
-public class Player {
+
+import java.util.Random;
+
+public class Player implements Validation {
     //Attributs
     private String name;
     private int health;
@@ -9,11 +12,11 @@ public class Player {
     private int maxHealthWizard = 15;
     private int maxHealthWarrior = 15;
     private int position = 0;
-
+    private String type;
+    private Menu menu;
     private EquipmentOffensive atkStuff;
     private EquipmentDefensive defStuff;
 
-    private String type;
     public static String[] typePlayer =  {"warrior", "wizard"};
     /* Approche ArrayList
     public static ArrayList<String> typePlayer = new ArrayList<>();
@@ -25,18 +28,21 @@ public class Player {
         typePlayer.add("guerrier");
         typePlayer.add("magicien");
         */
+        this.menu = new Menu();
         this.atkStuff = new EquipmentOffensive("cool",10);
         this.defStuff = new EquipmentDefensive("protector", 10);
     }
 
     public Player(String nameAssigned)
     {
+        this.menu = new Menu();
         this.name = nameAssigned;
         this.atkStuff = new EquipmentOffensive("cool",10);
         this.defStuff = new EquipmentDefensive("protector", 10);
     }
     public Player(String nameAssigned, int healthAssigned, int attackAssigned)
     {
+        this.menu = new Menu();
         this.name = nameAssigned;
         this.health = healthAssigned;
         this.attack = attackAssigned;
@@ -57,6 +63,25 @@ public class Player {
                 ", atkStuff=" + atkStuff +
                 ", defStuff=" + defStuff +
                 '}';
+    }
+
+
+    // Methods
+    public void generatePlayer()
+    {
+        String choice = this.menu.generatePlayer();
+        System.out.println("Choosed class: " + choice);
+        Player player = new Player();
+        player.setType(choice);
+        Random rn = new Random();
+        player.setHealth(rn.nextInt(player.getMaxHealthWarrior() - player.getMinHealthWarrior() + 1) + player.getMinHealthWarrior());
+        setPlayerName(player);
+    }
+    public void setPlayerName(Player player)
+    {
+        String choosedName = this.menu.getPlayerName();
+        player.setName(choosedName);
+        //initializedGameMenu();
     }
 
     // Getters & Setters
@@ -123,11 +148,7 @@ public class Player {
     public int getPosition() {
         return position;
     }
-
     public void setPosition(int position) {
         this.position = position;
     }
-
-    // Methods
-
 }

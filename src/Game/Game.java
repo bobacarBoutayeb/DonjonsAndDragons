@@ -7,14 +7,21 @@ public class Game {
     private int diceMax = 6;
     private boolean endGame = false;
     private Menu menu;
-    public Game(Menu menu){
-        //Construct
-        Menu start = new Menu();
+    private Player player;
+
+    /* Construct */
+    public Game(){
+        this.menu = new Menu();
+        this.player = new Player();
     }
 
-    /* Start Game */
+    /* Methods */
     public void startGame(){
-        this.menu.showFirstMenu();
+        switch (this.menu.showFirstMenu()) {
+            case "1" -> this.player.generatePlayer();
+//                this.menu.initializedGameMenu(); }
+            case "2" -> quitGame();
+        }
     }
     public void startSettingGame(Player player){
         System.out.println("Let the game begin!");
@@ -26,7 +33,7 @@ public class Game {
     public void playGame(Player player, Menu menu){
         endGame = false;
         do {
-            this.menu.alreadyStartedGameMenu(player);;
+            this.menu.alreadyStartedGameMenu();
             if (player.getPosition() >= this.boardLength) {
                 System.out.println("Good job, you won your place in paradise");
                 endGame = true;
@@ -38,12 +45,13 @@ public class Game {
         double diceRolled = ((Math.random() * (1000000)) % 6) +1;
         System.out.println("Dice roll :" + diceRolled);
     }
-
-    /* End of game */
     public void endGame(){
 
     }
-
+    public void quitGame()
+    {
+        System.out.println("Good bye ! Good idea leaving, it sinks too much here :D.");
+    }
     public int getDiceMax() {
         return diceMax;
     }
