@@ -79,7 +79,7 @@ public class Menu {
 
         return this.sc.nextLine();
     }
-    public String playerStatsMenu() {
+    public void playerStatsMenu(Player player) {
         System.out.println("""
                 ****************************
                 * Show player information: *
@@ -90,16 +90,42 @@ public class Menu {
                 4 - Go back to main menu
                 """);
 
-        return getValidChoice(new String[] {"1", "2", "3", "4"});
+        String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
+
+        switch (choice){
+            case "1" -> {
+                showName(player);
+                playerStatsMenu(player);
+            }
+            case "2" -> {
+                showHealth(player);
+                playerStatsMenu(player);
+            }
+            case "3" -> {
+                showAttack(player);
+                playerStatsMenu(player);
+            }
+            case "4" -> mainMenu(); // Broken
+        }
+
     }
     public void showName(Player player){
-        System.out.println("Player's name: " + player.getName());
+        System.out.println("******************************************");
+        System.out.println("* Player's name: " + player.getName() + " *");
+        System.out.println("******************************************");
+        System.out.println();
     }
     public void showHealth(Player player){
-        System.out.println(player.getName() + " have " + player.getHealth() + " HP.");
+        System.out.println("******************************************");
+        System.out.println("* " + player.getName() + " have " + player.getHealth() + " HP. *");
+        System.out.println("******************************************");
+        System.out.println();
     }
     public void showAttack(Player player){
-        System.out.println(player.getName() + " have " + player.getAttack() + " ATK.");
+        System.out.println("******************************************");
+        System.out.println("* " + player.getName() + " have " + player.getAttack() + " ATK. *");
+        System.out.println("******************************************");
+        System.out.println();
     }
 
     /* Les modifier */
@@ -176,6 +202,6 @@ public class Menu {
     }
     public void showPlayerPosition(Player player){
         System.out.println(player.getName() + " is now positioned at: " + player.getPosition());
-        System.out.println("----------------------------");
+        System.out.println("---------------------------------");
     }
 }

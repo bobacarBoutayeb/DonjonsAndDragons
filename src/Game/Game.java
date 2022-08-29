@@ -19,16 +19,19 @@ public class Game {
     /* Methods */
     public void welcomeGame(){
         switch (this.menu.welcomeMenu()) {
-            case "1" -> newGame();
+            case "1" -> gameSetup();
             case "2" -> quitGame();
         }
     }
-    public void newGame() {
+    public void gameSetup(){
         customiseDefaultPlayer();
+        newGame();
+    }
+    public void newGame() {
         switch (this.menu.mainMenu()) {
             case "1" -> startGame();
             case "2" -> newTurn();
-            case "3" -> this.menu.playerStatsMenu();
+            case "3" -> this.menu.playerStatsMenu(this.player);
             case "4" -> this.menu.playerStatsMenuModify();
             case "5" -> welcomeGame();
             case "6" -> quitGame();
@@ -63,7 +66,7 @@ public class Game {
             }
         } while (!endGame);
     }
-    /* Move player */
+    /* Player's movement */
     public void newTurn(){
 
     }
@@ -79,9 +82,6 @@ public class Game {
         int integerDiceRolled = (int) diceRolled;
         this.menu.showRolledDice(integerDiceRolled);
         return integerDiceRolled;
-    }
-    public void endGame(){
-
     }
     public void quitGame()
     {
