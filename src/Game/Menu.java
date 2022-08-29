@@ -6,10 +6,7 @@ import java.util.Scanner;
 public class Menu {
     Scanner sc = new Scanner(System.in);
     private String ChoiceInputPrompted(){
-        System.out.println("""
-                
-                *** Enter your choice: ***
-                """);
+        System.out.println("*** Enter your choice: ***");
         return this.sc.nextLine().toLowerCase();
     }
     private String getValidChoice (String[] options) {
@@ -18,10 +15,9 @@ public class Menu {
             System.out.println("""
                     
                     That's not a valid choice
-                    
-                    *** Please choose a correct one: ***
+                    Please choose a correct one
                     """);
-            ChoiceInputPrompted();
+            choice = ChoiceInputPrompted();
         }
         return choice;
     }
@@ -39,62 +35,22 @@ public class Menu {
                 """);
 
         return getValidChoice(new String[]{"1", "2"});
-/*
-        switch (choice) {
-            case "1" -> generatePlayer();
-            case "2" -> quitGame();
-        }*/
     }
-    public String initializedGameMenu()
+    public String mainMenu()
     {
         System.out.println("""
                 "***********************"
                 "* Choose your action: *"
                 "***********************"
                 1 - Start the game
-                2 - Show player's stats
-                3 - Modify player's stats
-                4 - Restart a new game
-                5 - Quit game
+                2 - Roll the dice to continue the game
+                3 - Show player's stats
+                4 - Modify player's stats
+                5 - Restart a new game
+                6 - Quit game
                 """);
 
-        return getValidChoice(new String[]{"1", "2", "3", "4", "5"});
-/*
-        switch (choice) {
-            case "1" -> this.game.startSettingGame(player);
-            case "2" -> playerStatsMenu(player);
-            case "3" -> playerStatsMenuModify(player);
-            case "4" -> showFirstMenu();
-            case "5" -> quitGame();
-        }
-        */
-    }
-
-    /* Already started Game Menu */
-    public String alreadyStartedGameMenu()
-    {
-        System.out.println("""
-                "***********************"
-                "* Choose your action: *"
-                "***********************"
-                1 - Roll the dice to continue the game
-                2 - Show player's stats
-                3 - Modify player's stats
-                4 - Restart a new game
-                5 - Quit game
-                """);
-
-        return getValidChoice(new String[]{"1", "2", "3", "4", "5"});
-
-        /*
-        switch (choice) {
-//            case "1" -> this.game.rollingDiceForMoving(player);
-            case "2" -> playerStatsMenu(player);
-            case "3" -> playerStatsMenuModify(player);
-            case "4" -> showFirstMenu();
-            case "5" -> quitGame();
-        }
-         */
+        return getValidChoice(new String[]{"1", "2", "3", "4", "5", "6"});
     }
     public void startGame(){
         System.out.println("Let the game begin!");
@@ -110,7 +66,6 @@ public class Menu {
 
         return getValidChoice(new String[]{"1", "2"});
     }
-
     public void displayClass(String choice){
         System.out.println("Choosed class: " + choice);
     }
@@ -119,8 +74,12 @@ public class Menu {
 
         return this.sc.nextLine();
     }
-    public String playerStatsMenu()
-    {
+    public String promptPlayerHealth() {
+        System.out.println("*** How much health you want to set? ***");
+
+        return this.sc.nextLine();
+    }
+    public String playerStatsMenu() {
         System.out.println("""
                 ****************************
                 * Show player information: *
@@ -132,25 +91,7 @@ public class Menu {
                 """);
 
         return getValidChoice(new String[] {"1", "2", "3", "4"});
-        /*
-        switch (choice) {
-            case "1" -> {
-                showName(player);
-                playerStatsMenu(player);
-            }
-            case "2" -> {
-                showHealth(player);
-                playerStatsMenu(player);
-            }
-            case "3" -> {
-                showAttack(player);
-                playerStatsMenu(player);
-            }
-            case "4" -> initializedGameMenu(player);
-        }
-         */
     }
-
     public void showName(Player player){
         System.out.println("Player's name: " + player.getName());
     }
@@ -162,8 +103,6 @@ public class Menu {
     }
 
     /* Les modifier */
-
-    /* Afficher info perso  */
     public String playerStatsMenuModify()
     {
         System.out.println("""
@@ -194,7 +133,7 @@ public class Menu {
             case "4" -> initializedGameMenu(player);
         }*/
     }
-    public void setHealthPrompted(Player player)
+    public int setHealthPrompted()
     {
         int choice;
         do {
@@ -209,10 +148,11 @@ public class Menu {
                 System.out.println("*** HP must be a positive value ***");
             }
         } while (choice <= 0);
-        player.setHealth(choice);
         this.sc.nextLine(); // clear buffer
+
+        return choice;
     }
-    public void setAttackPrompted(Player player)
+    public int setAttackPrompted()
     {
         int choice;
         do {
@@ -227,11 +167,15 @@ public class Menu {
                 System.out.println("ATK must be a positive value");
             }
         } while (choice <= 0);
-        player.setAttack(choice);
         this.sc.nextLine(); // clear buffer
-    }
 
+        return choice;
+    }
     public void showRolledDice(int diceRolled) {
         System.out.println("Dice roll :" + diceRolled);
+    }
+    public void showPlayerPosition(Player player){
+        System.out.println(player.getName() + " is now positioned at: " + player.getPosition());
+        System.out.println("----------------------------");
     }
 }

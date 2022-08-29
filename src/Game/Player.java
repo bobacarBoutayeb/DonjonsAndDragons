@@ -1,7 +1,5 @@
 package Game;
 
-import java.util.Random;
-
 public class Player {
     //Attributs
     private String name;
@@ -51,6 +49,7 @@ public class Player {
                 "name='" + name + '\'' +
                 ", health=" + health +
                 ", attack=" + attack +
+                ", position=" + position +
                 ", minHealthWarrior=" + minHealthWarrior +
                 ", minHealthWizard=" + minHealthWizard +
                 ", maxHealthWizard=" + maxHealthWizard +
@@ -62,15 +61,6 @@ public class Player {
 
     // Methods
 
-    public Player createPlayer(Player player) {
-        String choice = this.menu.generatePlayer();
-        this.menu.displayClass(choice);
-        player.setType(choice);
-        Random rn = new Random();
-        player.setHealth(rn.nextInt(player.getMaxHealthWarrior() - player.getMinHealthWarrior() + 1) + player.getMinHealthWarrior());
-        player.setPlayerName();
-        return player;
-    }
     public void setPlayerName() {
         this.setName(this.menu.getPlayerName());
     }

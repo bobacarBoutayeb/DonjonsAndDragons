@@ -1,9 +1,11 @@
 package Game;
 
+import java.util.Random;
+
 public class Game {
 //    Menu menu = new Menu();
     private int boardLength = 64;
-    private String[] board = new String[boardLength];
+    private Player[] board = new Player[boardLength];
     private int diceMax = 6;
     private boolean endGame = false;
     private Menu menu;
@@ -14,7 +16,6 @@ public class Game {
         this.menu = new Menu();
         this.player = new Player();
     }
-
     /* Methods */
     public void welcomeGame(){
         switch (this.menu.welcomeMenu()) {
@@ -23,37 +24,50 @@ public class Game {
         }
     }
     public void newGame() {
-        this.player.createPlayer(player); // return player
-        switch (this.menu.initializedGameMenu()) {
+        customiseDefaultPlayer();
+        switch (this.menu.mainMenu()) {
             case "1" -> startGame();
-            case "2" -> this.menu.playerStatsMenu();
-            case "3" -> this.menu.playerStatsMenuModify();
-            case "4" -> welcomeGame();
-            case "5" -> quitGame();
+            case "2" -> newTurn();
+            case "3" -> this.menu.playerStatsMenu();
+            case "4" -> this.menu.playerStatsMenuModify();
+            case "5" -> welcomeGame();
+            case "6" -> quitGame();
         }
+    }
+    public void customiseDefaultPlayer() {
+        String choice = this.menu.generatePlayer();
+        this.menu.displayClass(choice);
+        this.player.setType(choice);
+        Random rn = new Random();
+        this.player.setHealth(rn.nextInt(this.player.getMaxHealthWarrior() - this.player.getMinHealthWarrior() + 1) + this.player.getMinHealthWarrior());
+        this.player.setPlayerName();
     }
     public void startGame() {
         this.menu.startGame();
-        board(this.player);
+        boardSettingPlayerPosition(this.player);
         playGame();
     }
-    public void board(Player player) {
-        this.board[player.getPosition()] = player.getName();
-        System.out.println(this.board[player.getPosition()] + " is positioned at: " + player.getPosition());
+    public void boardSettingPlayerPosition(Player player) {
+        this.board[player.getPosition()] = player;
+        this.menu.showPlayerPosition(player);
     }
-    /* Play Game */
     public void playGame(){
         endGame = false;
         do {
 //            this.menu.alreadyStartedGameMenu();
             moveAfterRoll();
-            if (player.getPosition() >= this.boardLength) {
+            this.menu.showPlayerPosition(this.player);
+            if (this.player.getPosition() >= this.boardLength) {
                 System.out.println("Good job, you won your place in paradise");
                 endGame = true;
             }
         } while (!endGame);
     }
     /* Move player */
+    public void newTurn(){
+
+    }
+
     public void moveAfterRoll() {
 //        int newPosition = this.player.getPosition() + rollingDiceForMoving();
         int position = this.player.getPosition();
