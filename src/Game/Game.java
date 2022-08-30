@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Game {
 //    Menu menu = new Menu();
-    private int boardLength = 64;
+    private final int boardLength = 64;
     private Player[] board = new Player[boardLength];
     private int diceMax = 6;
     private boolean endGame = false;
@@ -17,24 +17,32 @@ public class Game {
         this.player = new Player();
     }
     /* Methods */
-    public void welcomeGame(){
-        switch (this.menu.welcomeMenu()) {
+    public boolean welcomeGame(){
+        return switch (this.menu.welcomeMenu()) {
             case "1" -> gameSetup();
             case "2" -> quitGame();
-        }
+            default -> true;
+        };
     }
-    public void gameSetup(){
+    public boolean gameSetup(){
         customiseDefaultPlayer();
         newGame();
+        return true; // we wanna play after setting up the game
     }
     public void newGame() {
-        switch (this.menu.mainMenu()) {
-            case "1" -> startGame();
-            case "2" -> newTurn();
-            case "3" -> this.menu.playerStatsMenu(this.player);
-            case "4" -> this.menu.playerStatsMenuModify();
-            case "5" -> welcomeGame();
-            case "6" -> quitGame();
+        boolean reboucle =
+            switch(this.menu.mainMenu()) {
+                case "1" -> startGame();
+                case "2" -> newTurn();
+                case "3" -> this.menu.playerStatsMenu(this.player);
+                case "4" -> this.menu.playerStatsMenuModify(this.player);
+                case "5" -> welcomeGame();
+                case "6" -> quitGame();
+                default -> false;
+            };
+
+        if (reboucle){
+            newGame();
         }
     }
     public void customiseDefaultPlayer() {
@@ -45,10 +53,14 @@ public class Game {
         this.player.setHealth(rn.nextInt(this.player.getMaxHealthWarrior() - this.player.getMinHealthWarrior() + 1) + this.player.getMinHealthWarrior());
         this.player.setPlayerName();
     }
-    public void startGame() {
+    public boolean startGame() {
         this.menu.startGame();
         boardSettingPlayerPosition(this.player);
         playGame();
+        // TODO replay mechanic
+        // Replay ?
+        welcomeGame();
+        return false;
     }
     public void boardSettingPlayerPosition(Player player) {
         this.board[player.getPosition()] = player;
@@ -61,14 +73,14 @@ public class Game {
             moveAfterRoll();
             this.menu.showPlayerPosition(this.player);
             if (this.player.getPosition() >= this.boardLength) {
-                System.out.println("Good job, you won your place in paradise");
+                this.menu.victory();
                 endGame = true;
             }
         } while (!endGame);
     }
     /* Player's movement */
-    public void newTurn(){
-
+    public boolean newTurn(){
+        return false;
     }
 
     public void moveAfterRoll() {
@@ -83,9 +95,10 @@ public class Game {
         this.menu.showRolledDice(integerDiceRolled);
         return integerDiceRolled;
     }
-    public void quitGame()
+    public boolean quitGame()
     {
         System.out.println("Good bye ! Good idea leaving, it sinks too much here :D.");
+        return false; // We always quit
     }
     public int getDiceMax() {
         return diceMax;

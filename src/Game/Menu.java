@@ -25,7 +25,7 @@ public class Menu {
     // Interface
     public String welcomeMenu() {
         System.out.println("""
-                Welcome to my Dungeons & Dragons game that sink !
+                Welcome back to my Dungeons & Dragons game that sink !
                 
                 ****************************
                 * Please choose an action: *
@@ -74,12 +74,7 @@ public class Menu {
 
         return this.sc.nextLine();
     }
-    public String promptPlayerHealth() {
-        System.out.println("*** How much health you want to set? ***");
-
-        return this.sc.nextLine();
-    }
-    public void playerStatsMenu(Player player) {
+    public boolean playerStatsMenu(Player player) {
         System.out.println("""
                 ****************************
                 * Show player information: *
@@ -91,23 +86,14 @@ public class Menu {
                 """);
 
         String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
-
+        boolean result = false;
         switch (choice){
-            case "1" -> {
-                showName(player);
-                playerStatsMenu(player);
-            }
-            case "2" -> {
-                showHealth(player);
-                playerStatsMenu(player);
-            }
-            case "3" -> {
-                showAttack(player);
-                playerStatsMenu(player);
-            }
-            case "4" -> mainMenu(); // Broken
+            case "1" -> showName(player);
+            case "2" -> showHealth(player);
+            case "3" -> showAttack(player);
+            case "4" -> result = true ;
         }
-
+        return result || playerStatsMenu(player); // If result false check the second thing.
     }
     public void showName(Player player){
         System.out.println("******************************************");
@@ -129,7 +115,7 @@ public class Menu {
     }
 
     /* Les modifier */
-    public String playerStatsMenuModify()
+    public boolean playerStatsMenuModify(Player player)
     {
         System.out.println("""
                 ******************************
@@ -141,7 +127,14 @@ public class Menu {
                 4 - Go back to main menu
                 """);
 
-        return getValidChoice(new String[] {"1", "2", "3", "4"});
+        String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
+        boolean result = false;
+        switch (choice){
+            case "1" -> player.setPlayerName();
+            case "2" -> player.setHealth(setHealthPrompted());
+            case "3" -> player.setAttack(setAttackPrompted());
+            case "4" -> result = true ;
+        }
         /*
         switch (choice) {
             case "1" -> {
@@ -158,6 +151,7 @@ public class Menu {
             }
             case "4" -> initializedGameMenu(player);
         }*/
+        return result || playerStatsMenuModify(player);
     }
     public int setHealthPrompted()
     {
@@ -183,7 +177,7 @@ public class Menu {
         int choice;
         do {
             System.out.println("*** How much ATK you want to set for this player? ***");
-            while (!this.sc.hasNextInt()) { //Check int
+            while (!this.sc.hasNextInt()) { // Check int
                 System.out.println("That's not number");
                 this.sc.next();
             }
@@ -203,5 +197,12 @@ public class Menu {
     public void showPlayerPosition(Player player){
         System.out.println(player.getName() + " is now positioned at: " + player.getPosition());
         System.out.println("---------------------------------");
+    }
+    public void victory(){
+        System.out.println("""
+                *********************************************
+                * Good job, you won your place in paradise! *
+                *********************************************
+                """);
     }
 }
