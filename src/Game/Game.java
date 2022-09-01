@@ -24,35 +24,38 @@ public class Game {
         while (!end){
             switch (this.states){
                 case INITIALISATION -> {
-                    customiseDefaultPlayer();
-                    beforeStartedGame();
+                    welcomeGame();
+//                    customiseDefaultPlayer();
+//                    beforeStartedGame();
                 }
 //                case CREATION -> ;
                 case PLAYING -> {
                     startedGame();
                 }
-                case KILLED -> finishedGame();
+                case KILLED -> end = wasted();
                 case ENDING -> end = finishedGame();
             }
         }
     }
     private boolean finishedGame() {
+        System.out.println("Finished Game");
         return true;
     }
-    private boolean playing() {
-        System.out.println("Etat Playing");
+    private boolean wasted() {
+        System.out.println("Wasted !");
         return true;
     }
     public boolean welcomeGame(){
         return switch (this.menu.welcomeMenu()) {
             case "1" -> gameSetup();
             case "2" -> quitGame();
+            default -> true;
         };
     }
     public boolean gameSetup(){
         customiseDefaultPlayer();
         beforeStartedGame();
-        return true; // we wanna play after setting up the game
+        return false; // we don't wanna start another start game menu
     }
     public void beforeStartedGame() {
         boolean reboucle =
@@ -60,7 +63,7 @@ public class Game {
                     case "1" -> startGame();
                     case "2" -> this.menu.playerStatsMenu(this.player);
                     case "3" -> this.menu.playerStatsMenuModify(this.player);
-                    case "4" -> gameSetup();
+                    case "4" -> welcomeGame();
                     case "5" -> quitGame();
                     default -> false;
                 };
@@ -76,7 +79,7 @@ public class Game {
                 case "1" -> newTurn();
                 case "2" -> this.menu.playerStatsMenu(this.player);
                 case "3" -> this.menu.playerStatsMenuModify(this.player);
-                case "4" -> gameSetup();
+                case "4" -> welcomeGame();
                 case "5" -> quitGame();
                 default -> false;
             };
