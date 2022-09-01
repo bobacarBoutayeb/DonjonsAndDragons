@@ -88,7 +88,7 @@ public class Menu {
 
         return this.sc.nextLine();
     }
-    public boolean playerStatsMenu(Player player) {
+    public String playerStatsMenu() {
         System.out.println("""
                 ****************************
                 * Show player information: *
@@ -99,15 +99,7 @@ public class Menu {
                 4 - Go back to main menu
                 """);
 
-        String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
-        boolean result = false;
-        switch (choice){
-            case "1" -> showName(player);
-            case "2" -> showHealth(player);
-            case "3" -> showAttack(player);
-            case "4" -> result = true ;
-        }
-        return result || playerStatsMenu(player); // If result false check the second thing.
+        return getValidChoice(new String[] {"1", "2", "3", "4"});
     }
     public void showName(Player player){
         System.out.println("******************************************");
@@ -129,7 +121,7 @@ public class Menu {
     }
 
     /* Les modifier */
-    public boolean playerStatsMenuModify(Player player)
+    public String playerStatsMenuModify(Player player)
     {
         System.out.println("""
                 ******************************
@@ -141,14 +133,8 @@ public class Menu {
                 4 - Go back to main menu
                 """);
 
-        String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
-        boolean result = false;
-        switch (choice){
-            case "1" -> player.setPlayerName();
-            case "2" -> player.setHealth(setHealthPrompted());
-            case "3" -> player.setAttack(setAttackPrompted());
-            case "4" -> result = true ;
-        }
+        return getValidChoice(new String[] {"1", "2", "3", "4"});
+
         /*
         switch (choice) {
             case "1" -> {
@@ -164,8 +150,8 @@ public class Menu {
                 playerStatsMenuModify(player);
             }
             case "4" -> initializedGameMenu(player);
+
         }*/
-        return result || playerStatsMenuModify(player);
     }
     public int setHealthPrompted()
     {

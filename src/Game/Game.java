@@ -24,7 +24,10 @@ public class Game {
             switch (this.states){
                 case INITIALISATION -> {
                     customiseDefaultPlayer();
-                    beforeStartedGame();
+                    while (this.states == GameStates.INITIALISATION)
+                    {
+                        beforeStartedGame();
+                    }
                 }
 //                case CREATION -> ;
                 case PLAYING -> end = playing();
@@ -49,39 +52,45 @@ public class Game {
             case "2" -> quitGame();
         }
     }
-    public boolean gameSetup(){
+    public void gameSetup(){
         customiseDefaultPlayer();
         beforeStartedGame();
-        return true; // we wanna play after setting up the game
     }
     public void beforeStartedGame() {
-        boolean reboucle =
-                switch(this.menu.menuBeforeStarting()) {
-                    case "1" -> startGame();
-                    case "2" -> this.menu.playerStatsMenu(this.player);
-                    case "3" -> this.menu.playerStatsMenuModify(this.player);
-                    case "4" -> gameSetup();
-                    case "5" -> quitGame();
-                    default -> false;
-                };
-
-        if (reboucle){
-            beforeStartedGame();
+        switch(this.menu.menuBeforeStarting()) {
+            case "1" -> startGame();
+            case "2" -> playerShowStats(this.player);
+            case "3" -> playerModifyStats(this.player);
+            case "4" -> gameSetup();
+            case "5" -> quitGame();
         }
     }
-    public void startedGame() {
-        boolean reboucle =
-            switch(this.menu.menuAfterStart()) {
-                case "1" -> newTurn();
-                case "2" -> this.menu.playerStatsMenu(this.player);
-                case "3" -> this.menu.playerStatsMenuModify(this.player);
-                case "4" -> gameSetup();
-                case "5" -> quitGame();
-                default -> false;
-            };
 
-        if (reboucle){
-            startedGame();
+    private void playerModifyStats(Player player) {
+        switch (this.menu.playerStatsMenuModify(player)){
+            case "1" -> player.setPlayerName();
+            case "2" -> player.setHealth(this.menu.setHealthPrompted());
+            case "3" -> player.setAttack(this.menu.setAttackPrompted());
+            case "4" -> playerModifyStats(player);
+        }
+    }
+
+    private void playerShowStats(Player player) {
+        switch (this.menu.playerStatsMenu()){
+            case "1" -> this.menu.showName(player);
+            case "2" -> this.menu.showHealth(player);
+            case "3" -> this.menu.showAttack(player);
+            case "4" -> playerShowStats(player) ;
+        }
+    }
+
+    public void startedGame() {
+        switch(this.menu.menuAfterStart()) {
+            case "1" -> newTurn();
+            case "2" -> playerShowStats(this.player);
+            case "3" -> this.menu.playerStatsMenuModify(this.player);
+            case "4" -> gameSetup();
+            case "5" -> quitGame();
         }
     }
     public void customiseDefaultPlayer() {
@@ -92,13 +101,11 @@ public class Game {
         this.player.setHealth(rn.nextInt(this.player.getMaxHealthWarrior() - this.player.getMinHealthWarrior() + 1) + this.player.getMinHealthWarrior());
         this.player.setPlayerName();
     }
-    public boolean startGame() {
+    public void startGame() {
         this.menu.startGame();
         // Todo Setting up the game
         // boardSettingPlayerPosition(this.player);
         this.states = GameStates.PLAYING;
-
-        return false;
     }
     public void boardSettingPlayerPosition(Player player) {
         this.board[player.getPosition()] = player;
@@ -133,11 +140,10 @@ public class Game {
         this.menu.showRolledDice(integerDiceRolled);
         return integerDiceRolled;
     }
-    public boolean quitGame()
+    public void quitGame()
     {
         System.out.println("Good bye ! Good idea leaving, it sinks too much here :D.");
         this.states = GameStates.ENDING;
-        return false; // We always quit
     }
     public int getDiceMax() {
         return diceMax;
