@@ -9,7 +9,7 @@ public class Player {
     private int minHealthWizard = 8;
     private int maxHealthWizard = 15;
     private int maxHealthWarrior = 15;
-    private int position = 0;
+    private int position;
     private String type;
     private Menu menu;
     private EquipmentOffensive atkStuff;

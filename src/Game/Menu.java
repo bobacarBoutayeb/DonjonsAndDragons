@@ -36,21 +36,35 @@ public class Menu {
 
         return getValidChoice(new String[]{"1", "2"});
     }
-    public String mainMenu()
+    public String menuBeforeStarting()
     {
         System.out.println("""
                 "***********************"
                 "* Choose your action: *"
                 "***********************"
                 1 - Start the game
-                2 - Roll the dice to continue the game
-                3 - Show player's stats
-                4 - Modify player's stats
-                5 - Restart a new game
-                6 - Quit game
+                2 - Show player's stats, to see your ugly zero
+                3 - Modify player's stats, cheat code is good
+                4 - Restart a new game
+                5 - Quit game
                 """);
 
-        return getValidChoice(new String[]{"1", "2", "3", "4", "5", "6"});
+        return getValidChoice(new String[]{"1", "2", "3", "4", "5"});
+    }
+    public String menuAfterStart()
+    {
+        System.out.println("""
+                "***********************"
+                "* Choose your action: *"
+                "***********************"
+                1 - Roll the dices
+                2 - Show player's stats, to see your ugly zero
+                3 - Modify player's stats, cheat code is good
+                4 - Restart a new game
+                5 - Quit game
+                """);
+
+        return getValidChoice(new String[]{"1", "2", "3", "4", "5"});
     }
     public void startGame(){
         System.out.println("Let the game begin!");
@@ -195,8 +209,9 @@ public class Menu {
         System.out.println("Dice roll :" + diceRolled);
     }
     public void showPlayerPosition(Player player){
-        System.out.println(player.getName() + " is now positioned at: " + player.getPosition());
-        System.out.println("---------------------------------");
+        System.out.println("------------------------");
+        System.out.println(player.getName() + " is positioned at: " + player.getPosition());
+        System.out.println("------------------------");
     }
     public void victory(){
         System.out.println("""
