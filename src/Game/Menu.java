@@ -39,9 +39,9 @@ public class Menu {
     public String menuBeforeStarting()
     {
         System.out.println("""
-                "***********************"
-                "* Choose your action: *"
-                "***********************"
+                ***********************
+                * Choose your action: *
+                ***********************
                 1 - Start the game
                 2 - Show player's stats, to see your ugly zero
                 3 - Modify player's stats, cheat code is good
@@ -206,12 +206,12 @@ public class Menu {
         return choice;
     }
     public void showRolledDice(int diceRolled) {
-        System.out.println("Dice roll :" + diceRolled);
+        System.out.println("-     Dice roll :" + diceRolled + "     -");
     }
     public void showPlayerPosition(Player player){
-        System.out.println("------------------------");
-        System.out.println(player.getName() + " is positioned at: " + player.getPosition());
-        System.out.println("------------------------");
+        System.out.println("-----------------------------------------");
+        System.out.println(" " + player.getName() + "  is positioned at: " + player.getPosition());
+        System.out.println("-----------------------------------------");
     }
     public void victory(){
         System.out.println("""
@@ -219,5 +219,15 @@ public class Menu {
                 * Good job, you won your place in paradise! *
                 *********************************************
                 """);
+    }
+
+    public void showTurn(int turn) {
+        System.out.println("-----------------------------------------");
+        System.out.println("                Tour " + turn);
+        System.out.println("-----------------------------------------");
+    }
+
+    public void leavingGame(){
+        System.out.println("Good bye ! Good idea leaving, it sinks too much here :D.");
     }
 }

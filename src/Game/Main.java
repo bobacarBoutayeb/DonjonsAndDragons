@@ -3,7 +3,7 @@ package Game;
 public class Main {
     public static void main(String[] args) {
         Game game = new Game();
-        game.welcomeGame();
-//        game.engine();
+//        game.welcomeGame();
+        game.engine();
     }
 }

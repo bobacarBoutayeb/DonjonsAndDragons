@@ -7,6 +7,7 @@ public class Game {
     private final int boardLength = 64;
     private Player[] board = new Player[boardLength];
     private int diceMax = 6;
+    private int turn;
     private boolean endGame = false;
     private Menu menu;
     private Player player;
@@ -27,27 +28,26 @@ public class Game {
                     beforeStartedGame();
                 }
 //                case CREATION -> ;
-                case PLAYING -> end = playing();
-                case KILLED -> leNeant();
-                case ENDING -> end = leNeant();
+                case PLAYING -> {
+                    startedGame();
+                }
+                case KILLED -> finishedGame();
+                case ENDING -> end = finishedGame();
             }
         }
     }
-
-    private boolean leNeant() {
-        System.out.println("neant");
+    private boolean finishedGame() {
         return true;
     }
     private boolean playing() {
-        System.out.println("play");
+        System.out.println("Etat Playing");
         return true;
     }
-
-    public void welcomeGame(){
-        switch (this.menu.welcomeMenu()) {
+    public boolean welcomeGame(){
+        return switch (this.menu.welcomeMenu()) {
             case "1" -> gameSetup();
             case "2" -> quitGame();
-        }
+        };
     }
     public boolean gameSetup(){
         customiseDefaultPlayer();
@@ -70,6 +70,7 @@ public class Game {
         }
     }
     public void startedGame() {
+        this.menu.showTurn(this.turn);
         boolean reboucle =
             switch(this.menu.menuAfterStart()) {
                 case "1" -> newTurn();
@@ -94,6 +95,7 @@ public class Game {
     }
     public boolean startGame() {
         this.menu.startGame();
+        this.turn = 1;
         // Todo Setting up the game
         // boardSettingPlayerPosition(this.player);
         this.states = GameStates.PLAYING;
@@ -118,10 +120,12 @@ public class Game {
     /* Player's movement */
     public boolean newTurn(){
         moveAfterRoll();
+        this.turn++;
         return true;
     }
 
     public void moveAfterRoll() {
+        this.menu.showTurn(this.turn);
         this.menu.showPlayerPosition(this.player);
         int newPosition = this.player.getPosition() + rollingDiceForMoving();
         this.player.setPosition(newPosition);
@@ -135,7 +139,7 @@ public class Game {
     }
     public boolean quitGame()
     {
-        System.out.println("Good bye ! Good idea leaving, it sinks too much here :D.");
+        this.menu.leavingGame();
         this.states = GameStates.ENDING;
         return false; // We always quit
     }
