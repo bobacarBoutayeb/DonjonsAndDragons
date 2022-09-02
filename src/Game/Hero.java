@@ -1,41 +1,19 @@
 package Game;
 
-public class Player extends Character{
+public class Hero extends Character{
     //Attributs
-    private String name;
-    private int health;
-    private int attack;
-    private int minHealthWarrior = 5;
-    private int minHealthWizard = 8;
-    private int maxHealthWizard = 15;
-    private int maxHealthWarrior = 15;
-    private int position;
-    private String type;
-    private Menu menu;
-    private EquipmentOffensive atkStuff;
-    private EquipmentDefensive defStuff;
-
-    public static String[] typePlayer =  {"warrior", "wizard"};
-    /* Approche ArrayList
-    public static ArrayList<String> typePlayer = new ArrayList<>();
-    */
-    //Constructs
-    public Player() {
-        /* ArrayList
-        typePlayer.add("guerrier");
-        typePlayer.add("magicien");
-        */
+    public Hero() {
         this.menu = new Menu();
         this.atkStuff = new EquipmentOffensive("cool",10);
         this.defStuff = new EquipmentDefensive("protector", 10);
     }
-    public Player(String nameAssigned) {
+    public Hero(String nameAssigned) {
         this.menu = new Menu();
         this.name = nameAssigned;
         this.atkStuff = new EquipmentOffensive("cool",10);
         this.defStuff = new EquipmentDefensive("protector", 10);
     }
-    public Player(String nameAssigned, int healthAssigned, int attackAssigned) {
+    public Hero(String nameAssigned, int healthAssigned, int attackAssigned) {
         this.menu = new Menu();
         this.name = nameAssigned;
         this.health = healthAssigned;

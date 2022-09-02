@@ -25,8 +25,6 @@ public class Game {
             switch (this.states){
                 case INITIALISATION -> {
                     welcomeGame();
-//                    customiseDefaultPlayer();
-//                    beforeStartedGame();
                 }
 //                case CREATION -> ;
                 case PLAYING -> {
