@@ -1,28 +1,68 @@
 package Game;
 
 abstract class Character {
-
     protected String name;
-    protected int position;
+    protected int position = 0;
     protected EquipmentOffensive atkStuff;
     protected int attack;
     protected EquipmentDefensive defStuff;
     protected int health;
-    protected int minHealth;
-    protected int maxHealth;
-    public Character(String name, int attack, int health, int minHealth, int maxHealth){
-        this.name = name;
-        this.atkStuff = new EquipmentOffensive("atk",0);
+    public Character(int attack,int health){
         this.attack = attack;
-        this.defStuff = new EquipmentDefensive("def",0);
         this.health = health;
-        this.minHealth = minHealth;
-        this.maxHealth = maxHealth;
     }
 
     // Methods
-    public static int getRandomMaxHealth(int maxHealth){
-        return (int) (((Math.random() * (1000000)) % maxHealth) +1);
+    public static int randomStat(int minStat, int maxStat){
+        int rangeMinMaxHealth = maxStat - minStat;
+        return (int) (((Math.random() * (1000000)) % rangeMinMaxHealth) + minStat);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public EquipmentOffensive getAtkStuff() {
+        return atkStuff;
+    }
+
+    public void setAtkStuff(EquipmentOffensive atkStuff) {
+        this.atkStuff = atkStuff;
+    }
+
+    public EquipmentDefensive getDefStuff() {
+        return defStuff;
+    }
+
+    public void setDefStuff(EquipmentDefensive defStuff) {
+        this.defStuff = defStuff;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
 }

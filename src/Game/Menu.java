@@ -88,7 +88,7 @@ public class Menu {
 
         return this.sc.nextLine();
     }
-    public boolean playerStatsMenu(Player player) {
+    public boolean playerStatsMenu(Character character) {
         System.out.println("""
                 ****************************
                 * Show player information: *
@@ -102,34 +102,34 @@ public class Menu {
         String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
         boolean result = false;
         switch (choice){
-            case "1" -> showName(player);
-            case "2" -> showHealth(player);
-            case "3" -> showAttack(player);
+            case "1" -> showName(character);
+            case "2" -> showHealth(character);
+            case "3" -> showAttack(character);
             case "4" -> result = true ;
         }
-        return result || playerStatsMenu(player); // If result false check the second thing.
+        return result || playerStatsMenu(character); // If result false check the second thing.
     }
-    public void showName(Player player){
+    public void showName(Character character){
         System.out.println("******************************************");
-        System.out.println("* Player's name: " + player.getName() + " *");
+        System.out.println("* Player's name: " +  character.getName() + " *");
         System.out.println("******************************************");
         System.out.println();
     }
-    public void showHealth(Player player){
+    public void showHealth(Character character){
         System.out.println("******************************************");
-        System.out.println("* " + player.getName() + " have " + player.getHealth() + " HP. *");
+        System.out.println("* " +  character.getName() + " have " +  character.getHealth() + " HP. *");
         System.out.println("******************************************");
         System.out.println();
     }
-    public void showAttack(Player player){
+    public void showAttack(Character character){
         System.out.println("******************************************");
-        System.out.println("* " + player.getName() + " have " + player.getAttack() + " ATK. *");
+        System.out.println("* " +  character.getName() + " have " +  character.getAttack() + " ATK. *");
         System.out.println("******************************************");
         System.out.println();
     }
 
     /* Les modifier */
-    public boolean playerStatsMenuModify(Player player)
+    public boolean playerStatsMenuModify(Character character)
     {
         System.out.println("""
                 ******************************
@@ -144,9 +144,9 @@ public class Menu {
         String choice = getValidChoice(new String[] {"1", "2", "3", "4"});
         boolean result = false;
         switch (choice){
-            case "1" -> player.setPlayerName();
-            case "2" -> player.setHealth(setHealthPrompted());
-            case "3" -> player.setAttack(setAttackPrompted());
+            case "1" ->  character.setName(getPlayerName());
+            case "2" ->  character.setHealth(setHealthPrompted());
+            case "3" ->  character.setAttack(setAttackPrompted());
             case "4" -> result = true ;
         }
         /*
@@ -165,7 +165,7 @@ public class Menu {
             }
             case "4" -> initializedGameMenu(player);
         }*/
-        return result || playerStatsMenuModify(player);
+        return result || playerStatsMenuModify(character);
     }
     public int setHealthPrompted()
     {
@@ -208,9 +208,9 @@ public class Menu {
     public void showRolledDice(int diceRolled) {
         System.out.println("-     Dice roll :" + diceRolled + "     -");
     }
-    public void showPlayerPosition(Player player){
+    public void showPlayerPosition(Character character){
         System.out.println("-----------------------------------------");
-        System.out.println(" " + player.getName() + "  is positioned at: " + player.getPosition());
+        System.out.println(" " +  character.getName() + "  is positioned at: " +  character.getPosition());
         System.out.println("-----------------------------------------");
     }
     public void victory(){

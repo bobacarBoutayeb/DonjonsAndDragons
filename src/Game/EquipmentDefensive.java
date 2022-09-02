@@ -1,9 +1,9 @@
 package Game;
 
-public class EquipmentDefensive {
+abstract class EquipmentDefensive {
     //Attributs
-    private String name;
-    private int defense;
+    protected String name;
+    protected int defense;
 
     // Constructor
 

@@ -1,35 +1,27 @@
 package Game;
 
-import java.util.Random;
-
 public class Game {
 //    Menu menu = new Menu();
     private final int boardLength = 64;
-    private Player[] board = new Player[boardLength];
+    private Character[] board = new Character[boardLength];
     private int diceMax = 6;
     private int turn;
     private boolean endGame = false;
-    private Menu menu;
-    private Player player;
+    private final Menu menu = new Menu();
+    private Character character;
     private GameStates states = GameStates.INITIALISATION;
 
     /* Construct */
     public Game(){
-        this.menu = new Menu();
-        this.player = new Player();
     }
     /* Methods */
     public void engine(){
         boolean end = false;
         while (!end){
             switch (this.states){
-                case INITIALISATION -> {
-                    welcomeGame();
-                }
+                case INITIALISATION -> welcomeGame();
 //                case CREATION -> ;
-                case PLAYING -> {
-                    startedGame();
-                }
+                case PLAYING -> startedGame();
                 case KILLED -> end = wasted();
                 case ENDING -> end = finishedGame();
             }
@@ -59,8 +51,8 @@ public class Game {
         boolean reboucle =
                 switch(this.menu.menuBeforeStarting()) {
                     case "1" -> startGame();
-                    case "2" -> this.menu.playerStatsMenu(this.player);
-                    case "3" -> this.menu.playerStatsMenuModify(this.player);
+                    case "2" -> this.menu.playerStatsMenu(this.character);
+                    case "3" -> this.menu.playerStatsMenuModify(this.character);
                     case "4" -> welcomeGame();
                     case "5" -> quitGame();
                     default -> false;
@@ -75,8 +67,8 @@ public class Game {
         boolean reboucle =
             switch(this.menu.menuAfterStart()) {
                 case "1" -> newTurn();
-                case "2" -> this.menu.playerStatsMenu(this.player);
-                case "3" -> this.menu.playerStatsMenuModify(this.player);
+                case "2" -> this.menu.playerStatsMenu(this.character);
+                case "3" -> this.menu.playerStatsMenuModify(this.character);
                 case "4" -> welcomeGame();
                 case "5" -> quitGame();
                 default -> false;
@@ -89,10 +81,18 @@ public class Game {
     public void customiseDefaultPlayer() {
         String choice = this.menu.generatePlayer();
         this.menu.displayClass(choice);
-        this.player.setType(choice);
-        Random rn = new Random();
-        this.player.setHealth(rn.nextInt(this.player.getMaxHealthWarrior() - this.player.getMinHealthWarrior() + 1) + this.player.getMinHealthWarrior());
-        this.player.setPlayerName();
+        this.character = switch (choice){
+                case "1" -> new Warrior();
+                case "2" -> new Wizard();
+                default -> null;
+            };
+        /* Check la branche false d'un if:
+
+        Objects.requireNonNull(this.character); Public
+        assert this.character != null : "Choix invalide"; Privée pour vérifier dès le début avant publication de l'info
+         */
+        this.character.setName(this.menu.getPlayerName());
+        System.out.println(this.character);
     }
     public boolean startGame() {
         this.menu.startGame();
@@ -103,16 +103,16 @@ public class Game {
 
         return false;
     }
-    public void boardSettingPlayerPosition(Player player) {
-        this.board[player.getPosition()] = player;
-        this.menu.showPlayerPosition(player);
+    public void boardSettingPlayerPosition(Character character) {
+        this.board[ character.getPosition()] = character;
+        this.menu.showPlayerPosition(character);
     }
     public void playGame(){
         endGame = false;
-        this.player.setPosition(0);
+        this.character.setPosition(0);
         do {
             moveAfterRoll();
-            if (this.player.getPosition() >= this.boardLength) {
+            if (this.character.getPosition() >= this.boardLength) {
                 this.menu.victory();
                 endGame = true;
             }
@@ -127,10 +127,10 @@ public class Game {
 
     public void moveAfterRoll() {
         this.menu.showTurn(this.turn);
-        this.menu.showPlayerPosition(this.player);
-        int newPosition = this.player.getPosition() + rollingDiceForMoving();
-        this.player.setPosition(newPosition);
-        this.menu.showPlayerPosition(this.player);
+        this.menu.showPlayerPosition(this.character);
+        int newPosition = this.character.getPosition() + rollingDiceForMoving();
+        this.character.setPosition(newPosition);
+        this.menu.showPlayerPosition(this.character);
     }
     public int rollingDiceForMoving(){
         double diceRolled = ((Math.random() * (1000000)) % this.diceMax) +1;

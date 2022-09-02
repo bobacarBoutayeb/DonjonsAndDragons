@@ -15,8 +15,8 @@ public class EquipmentOffensive {
 
     /* Construct
 
-    public EquipmentOffensive(Player player){
-        if (player.getType() == "warrior"){
+    public EquipmentOffensive(Character character){
+        if ( character.getType() == "warrior"){
             this.
             this.player = this.weapon;
             this.player = this.attack;
