@@ -1,8 +1,9 @@
-package Game;
+package game;
+
+import character.Perso;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
 public class Menu {
     Scanner sc = new Scanner(System.in);
     private String ChoiceInputPrompted(){
@@ -88,7 +89,7 @@ public class Menu {
 
         return this.sc.nextLine();
     }
-    public boolean playerStatsMenu(Character character) {
+    public boolean playerStatsMenu(Perso character) {
         System.out.println("""
                 ****************************
                 * Show player information: *
@@ -109,19 +110,19 @@ public class Menu {
         }
         return result || playerStatsMenu(character); // If result false check the second thing.
     }
-    public void showName(Character character){
+    public void showName(Perso character){
         System.out.println("******************************************");
         System.out.println("* Player's name: " +  character.getName() + " *");
         System.out.println("******************************************");
         System.out.println();
     }
-    public void showHealth(Character character){
+    public void showHealth(Perso character){
         System.out.println("******************************************");
         System.out.println("* " +  character.getName() + " have " +  character.getHealth() + " HP. *");
         System.out.println("******************************************");
         System.out.println();
     }
-    public void showAttack(Character character){
+    public void showAttack(Perso character){
         System.out.println("******************************************");
         System.out.println("* " +  character.getName() + " have " +  character.getAttack() + " ATK. *");
         System.out.println("******************************************");
@@ -129,7 +130,7 @@ public class Menu {
     }
 
     /* Les modifier */
-    public boolean playerStatsMenuModify(Character character)
+    public boolean playerStatsMenuModify(Perso character)
     {
         System.out.println("""
                 ******************************
@@ -208,7 +209,7 @@ public class Menu {
     public void showRolledDice(int diceRolled) {
         System.out.println("-     Dice roll :" + diceRolled + "     -");
     }
-    public void showPlayerPosition(Character character){
+    public void showPlayerPosition(Perso character){
         System.out.println("-----------------------------------------");
         System.out.println(" " +  character.getName() + "  is positioned at: " +  character.getPosition());
         System.out.println("-----------------------------------------");

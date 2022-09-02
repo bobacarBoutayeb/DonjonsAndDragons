@@ -1,13 +1,16 @@
-package Game;
+package character;
 
-abstract class Character {
+import character.stuff.EquipmentDefensive;
+import character.stuff.EquipmentOffensive;
+
+public abstract class Perso {
     protected String name;
     protected int position = 0;
     protected EquipmentOffensive atkStuff;
     protected int attack;
     protected EquipmentDefensive defStuff;
     protected int health;
-    public Character(int attack,int health){
+    public Perso(int attack, int health){
         this.attack = attack;
         this.health = health;
     }

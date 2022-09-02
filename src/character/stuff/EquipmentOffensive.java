@@ -1,18 +1,16 @@
-package Game;
+package character.stuff;
 
-public class EquipmentOffensive {
+public abstract class EquipmentOffensive {
 
     // Attributs
-    private String name;
-    private int attack;
+    protected String name;
+    protected int attack;
 
     // Constructor
-
-    public EquipmentOffensive(String name, int attack){
+    protected EquipmentOffensive(String name, int attack){
         this.name = name;
         this.attack = attack;
     }
-
     /* Construct
 
     public EquipmentOffensive(Character character){
@@ -28,30 +26,11 @@ public class EquipmentOffensive {
     }*/
 
     // toString
-
     @Override
     public String toString() {
         return "EquipmentOffensive{" +
                 "name='" + name + '\'' +
                 ", attack=" + attack +
                 '}';
-    }
-
-    // Getters and Setters
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
     }
 }

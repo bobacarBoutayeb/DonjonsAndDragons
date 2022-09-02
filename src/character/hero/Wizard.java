@@ -1,6 +1,7 @@
-package Game;
+package character.hero;
 
-public class Wizard extends Character{
+import character.Perso;
+public class Wizard extends Perso {
 
     private static final int minHealthWizard = 5;
     private static final int maxHealthWizard = 10;

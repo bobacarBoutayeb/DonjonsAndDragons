@@ -1,14 +1,18 @@
-package Game;
+package game;
+
+import character.Perso;
+import character.hero.Warrior;
+import character.hero.Wizard;
 
 public class Game {
 //    Menu menu = new Menu();
     private final int boardLength = 64;
-    private Character[] board = new Character[boardLength];
+    private Perso[] board = new Perso[boardLength];
     private int diceMax = 6;
     private int turn;
     private boolean endGame = false;
     private final Menu menu = new Menu();
-    private Character character;
+    private Perso character;
     private GameStates states = GameStates.INITIALISATION;
 
     /* Construct */
@@ -103,8 +107,8 @@ public class Game {
 
         return false;
     }
-    public void boardSettingPlayerPosition(Character character) {
-        this.board[ character.getPosition()] = character;
+    public void boardSettingPlayerPosition(Perso character) {
+        this.board[character.getPosition()] = character;
         this.menu.showPlayerPosition(character);
     }
     public void playGame(){

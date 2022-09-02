@@ -56,7 +56,7 @@ CONSEILS DE DÉVELOPPEMENT
 - Une classe « Personnage » qui aura 3 constructeurs (sans paramètres, avec nom, et avec nom/niveau de vie/force d’attaque)
 - Une classe « Menu » qui vous permettra de structurer correctement le déroulement du jeu et les messages pour l’utilisateur en utilisant des fonctions.
 
-- Une classe « Game » qui contiendra la logique interne du jeu ( joueurs, avancement )
+- Une classe « game » qui contiendra la logique interne du jeu ( joueurs, avancement )
 - **Attention!!** Toutes vos classes devront être structurées correctement (Getters/Setters, constructeurs, méthode toString(), ...).
 
 RESSOURCES
