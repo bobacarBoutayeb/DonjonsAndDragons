@@ -3,14 +3,14 @@ package character;
 import character.stuff.EquipmentDefensive;
 import character.stuff.EquipmentOffensive;
 
-public abstract class Perso {
+public abstract class Toon {
     protected String name;
     protected int position = 0;
     protected EquipmentOffensive atkStuff;
     protected int attack;
     protected EquipmentDefensive defStuff;
     protected int health;
-    public Perso(int attack, int health){
+    public Toon(int attack, int health){
         this.attack = attack;
         this.health = health;
     }

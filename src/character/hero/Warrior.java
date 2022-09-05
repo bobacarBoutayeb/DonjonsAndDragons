@@ -1,8 +1,8 @@
 package character.hero;
 
-import character.Perso;
+import character.Toon;
 
-public class Warrior extends Perso {
+public class Warrior extends Toon {
 
     private static final int minHealthWarrior = 5;
     private static final int maxHealthWarrior = 10;

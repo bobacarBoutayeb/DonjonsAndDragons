@@ -1,6 +1,6 @@
 package game;
 
-import character.Perso;
+import character.Toon;
 import character.hero.HeroOutOfBound;
 import character.hero.Warrior;
 import character.hero.Wizard;
@@ -8,12 +8,12 @@ import character.hero.Wizard;
 public class Game {
 //    Menu menu = new Menu();
     private final int boardLength = 64;
-    private Perso[] board = new Perso[boardLength];
+    private Toon[] board = new Toon[boardLength];
     private int diceMax = 6;
     private int turn;
     private boolean endGame = false;
     private final Menu menu = new Menu();
-    private Perso character;
+    private Toon character;
     private GameStates states = GameStates.INITIALISATION;
 
     /* Construct */
@@ -122,7 +122,7 @@ public class Game {
 
         return false;
     }
-    public void boardSettingPlayerPosition(Perso character) {
+    public void boardSettingPlayerPosition(Toon character) {
         this.board[character.getPosition()] = character;
         this.menu.showPlayerPosition(character);
     }
@@ -151,9 +151,22 @@ public class Game {
         if (newPosition >= 64){
             throw new HeroOutOfBound();
         } else {
-            this.character.setPosition(newPosition);
+        this.character.setPosition(newPosition);
             this.menu.showPlayerPosition(this.character);
         }
+
+/*
+    //TODO check Good way to catch and throws
+        try {
+            if (newPosition < 64) {
+                this.character.setPosition(newPosition);
+            } else {
+                throw new HeroOutOfBound();
+            }
+        } catch (HeroOutOfBound e) {
+            e.printStackTrace();
+        }
+        */
     }
     public int rollingDiceForMoving(){
         double diceRolled = ((Math.random() * (1000000)) % this.diceMax) +1;
