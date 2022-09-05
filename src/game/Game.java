@@ -1,26 +1,23 @@
 package game;
 
 import character.Toon;
-import character.hero.HeroOutOfBound;
 import character.hero.Warrior;
 import character.hero.Wizard;
 
 public class Game {
-//    Menu menu = new Menu();
-    private final int boardLength = 64;
-    private Toon[] board = new Toon[boardLength];
-    private int diceMax = 6;
+    private int diceMax = 1;
     private int turn;
     private boolean endGame = false;
     private final Menu menu = new Menu();
     private Toon character;
+    private final Board board = new Board();
     private GameStates states = GameStates.INITIALISATION;
 
     /* Construct */
     public Game(){
     }
     /* Methods */
-    public void engine() throws HeroOutOfBound {
+    public void engine() {
         boolean end = false;
         while (!end){
             switch (this.states){
@@ -48,6 +45,7 @@ public class Game {
         };
     }
     public boolean gameSetup(){
+        board.initBoard();
         customiseDefaultPlayer();
         beforeStartedGame();
         return false; // we don't wanna start another start game menu
@@ -67,7 +65,7 @@ public class Game {
             beforeStartedGame();
         }
     }
-    public void startedGame() throws HeroOutOfBound {
+    public void startedGame() {
         boolean reboucle = true;
         while (reboucle) {
             this.menu.showTurn(this.turn);
@@ -122,52 +120,31 @@ public class Game {
 
         return false;
     }
-    public void boardSettingPlayerPosition(Toon character) {
-        this.board[character.getPosition()] = character;
-        this.menu.showPlayerPosition(character);
-    }
-    public void playGame() throws HeroOutOfBound {
+    public void playGame() {
         endGame = false;
         this.character.setPosition(0);
         do {
             moveAfterRoll();
-            if (this.character.getPosition() >= this.boardLength) {
+            if (this.character.getPosition() >= 64) {
                 this.menu.victory();
                 endGame = true;
             }
         } while (!endGame);
     }
     /* Player's movement */
-    public boolean newTurn() throws HeroOutOfBound {
+    public boolean newTurn() {
         moveAfterRoll();
         this.turn++;
         return true;
     }
-
-    public void moveAfterRoll() throws HeroOutOfBound{
+    public void moveAfterRoll() {
         this.menu.showTurn(this.turn);
         this.menu.showPlayerPosition(this.character);
         int newPosition = this.character.getPosition() + rollingDiceForMoving();
-        if (newPosition >= 64){
-            throw new HeroOutOfBound();
-        } else {
         this.character.setPosition(newPosition);
-            this.menu.showPlayerPosition(this.character);
+        this.board
+        this.menu.showPlayerPosition(this.character);
         }
-
-/*
-    //TODO check Good way to catch and throws
-        try {
-            if (newPosition < 64) {
-                this.character.setPosition(newPosition);
-            } else {
-                throw new HeroOutOfBound();
-            }
-        } catch (HeroOutOfBound e) {
-            e.printStackTrace();
-        }
-        */
-    }
     public int rollingDiceForMoving(){
         double diceRolled = ((Math.random() * (1000000)) % this.diceMax) +1;
         int integerDiceRolled = (int) diceRolled;

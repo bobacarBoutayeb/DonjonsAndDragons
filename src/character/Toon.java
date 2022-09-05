@@ -2,8 +2,9 @@ package character;
 
 import character.stuff.EquipmentDefensive;
 import character.stuff.EquipmentOffensive;
+import interactions.Interact;
 
-public abstract class Toon {
+public abstract class Toon implements Interact {
     protected String name;
     protected int position = 0;
     protected EquipmentOffensive atkStuff;
@@ -20,7 +21,29 @@ public abstract class Toon {
         int rangeMinMaxHealth = maxStat - minStat;
         return (int) (((Math.random() * (1000000)) % rangeMinMaxHealth) + minStat);
     }
+    @Override
+    public void interact(Toon toon) {
 
+    }
+    @Override
+    public Toon fight(Toon toon) {
+        System.out.println("Fight!");
+
+        toon.health = toon.health - this.attack;
+        return toon;
+    }
+    @Override
+    public Toon defend(Toon toon) {
+        System.out.println("Esquive");
+
+        this.health = this.health - toon.attack;
+        return this;
+    }
+    @Override
+    public Toon fly(Toon toon) {
+        System.out.println("Run Forest, run!");
+        return toon;
+    }
     public String getName() {
         return name;
     }

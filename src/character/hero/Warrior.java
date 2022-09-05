@@ -1,8 +1,9 @@
 package character.hero;
 
 import character.Toon;
+import interactions.Interact;
 
-public class Warrior extends Toon {
+public class Warrior extends Toon{
 
     private static final int minHealthWarrior = 5;
     private static final int maxHealthWarrior = 10;

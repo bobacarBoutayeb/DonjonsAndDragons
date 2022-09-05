@@ -3,7 +3,7 @@ package game;
 import character.hero.HeroOutOfBound;
 
 public class Main {
-    public static void main(String[] args) throws HeroOutOfBound {
+    public static void main(String[] args) {
         Game game = new Game();
         game.engine();
     }

@@ -1,6 +1,9 @@
 package character.stuff;
 
-public abstract class EquipmentOffensive {
+import character.Toon;
+import interactions.Interact;
+
+public abstract class EquipmentOffensive implements Interact {
 
     // Attributs
     protected String name;
@@ -24,6 +27,27 @@ public abstract class EquipmentOffensive {
             this.player = this.attack;
         }
     }*/
+
+
+    @Override
+    public void interact(Toon toon) {
+
+    }
+
+    @Override
+    public Toon fight(Toon toon) {
+        return null;
+    }
+
+    @Override
+    public Toon defend(Toon toon) {
+        return null;
+    }
+
+    @Override
+    public Toon fly(Toon toon) {
+        return null;
+    }
 
     // toString
     @Override
