@@ -1,6 +1,7 @@
 package character.hero;
 
 import character.Perso;
+
 public class Wizard extends Perso {
 
     private static final int minHealthWizard = 5;

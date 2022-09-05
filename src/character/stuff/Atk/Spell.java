@@ -6,7 +6,7 @@ public class Spell extends EquipmentOffensive {
 
     public Spell(){
         super(
-                "spell",
+                "ATK - Spell",
                 0
         );
     }

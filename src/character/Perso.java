@@ -62,6 +62,7 @@ public abstract class Perso {
     }
 
     public int getAttack() {
+
         return attack;
     }
 

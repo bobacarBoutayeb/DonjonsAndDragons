@@ -1,6 +1,7 @@
 package game;
 
 import character.Perso;
+import character.hero.HeroOutOfBound;
 import character.hero.Warrior;
 import character.hero.Wizard;
 
@@ -19,7 +20,7 @@ public class Game {
     public Game(){
     }
     /* Methods */
-    public void engine(){
+    public void engine() throws HeroOutOfBound {
         boolean end = false;
         while (!end){
             switch (this.states){
@@ -66,20 +67,34 @@ public class Game {
             beforeStartedGame();
         }
     }
-    public void startedGame() {
-        this.menu.showTurn(this.turn);
-        boolean reboucle =
-            switch(this.menu.menuAfterStart()) {
-                case "1" -> newTurn();
-                case "2" -> this.menu.playerStatsMenu(this.character);
-                case "3" -> this.menu.playerStatsMenuModify(this.character);
-                case "4" -> welcomeGame();
-                case "5" -> quitGame();
-                default -> false;
-            };
-
-        if (reboucle){
-            startedGame();
+    public void startedGame() throws HeroOutOfBound {
+        boolean reboucle = true;
+        while (reboucle) {
+            this.menu.showTurn(this.turn);
+            reboucle =
+                switch (this.menu.menuAfterStart()) {
+                    case "1" -> newTurn();
+                    case "2" -> this.menu.playerStatsMenu(this.character);
+                    case "3" -> this.menu.playerStatsMenuModify(this.character);
+                    case "4" -> welcomeGame();
+                    case "5" -> quitGame();
+                    default -> false;
+                };
+            /*
+            try {
+                if (this.character.getPosition() >= 64) {
+                    throw new HeroOutOfBound();
+                }
+            } catch (HeroOutOfBound e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println("""
+                        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        !    Passage par un bloc try/catch    !
+                        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        """);
+            }
+            */
         }
     }
     public void customiseDefaultPlayer() {
@@ -90,13 +105,13 @@ public class Game {
                 case "2" -> new Wizard();
                 default -> null;
             };
+
         /* Check la branche false d'un if:
 
         Objects.requireNonNull(this.character); Public
         assert this.character != null : "Choix invalide"; Privée pour vérifier dès le début avant publication de l'info
          */
         this.character.setName(this.menu.getPlayerName());
-        System.out.println(this.character);
     }
     public boolean startGame() {
         this.menu.startGame();
@@ -111,7 +126,7 @@ public class Game {
         this.board[character.getPosition()] = character;
         this.menu.showPlayerPosition(character);
     }
-    public void playGame(){
+    public void playGame() throws HeroOutOfBound {
         endGame = false;
         this.character.setPosition(0);
         do {
@@ -123,18 +138,22 @@ public class Game {
         } while (!endGame);
     }
     /* Player's movement */
-    public boolean newTurn(){
+    public boolean newTurn() throws HeroOutOfBound {
         moveAfterRoll();
         this.turn++;
         return true;
     }
 
-    public void moveAfterRoll() {
+    public void moveAfterRoll() throws HeroOutOfBound{
         this.menu.showTurn(this.turn);
         this.menu.showPlayerPosition(this.character);
         int newPosition = this.character.getPosition() + rollingDiceForMoving();
-        this.character.setPosition(newPosition);
-        this.menu.showPlayerPosition(this.character);
+        if (newPosition >= 64){
+            throw new HeroOutOfBound();
+        } else {
+            this.character.setPosition(newPosition);
+            this.menu.showPlayerPosition(this.character);
+        }
     }
     public int rollingDiceForMoving(){
         double diceRolled = ((Math.random() * (1000000)) % this.diceMax) +1;
