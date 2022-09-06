@@ -140,7 +140,9 @@ public class Game {
         this.menu.showPlayerPosition(this.character);
         int newPosition = this.character.getPosition() + rollingDiceForMoving();
         this.character.setPosition(newPosition);
-        System.out.println(" What is here? " + this.board.getCells().get(newPosition));
+        System.out.println(" What is here? " + this.board.getCell(newPosition));
+        System.out.println("Event: ");
+        this.board.getCell(newPosition).interact(this.character);
         this.menu.showPlayerPosition(this.character);
         }
     public int rollingDiceForMoving(){

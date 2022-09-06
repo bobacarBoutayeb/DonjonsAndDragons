@@ -31,23 +31,23 @@ public abstract class EquipmentOffensive implements Interact {
 
     @Override
     public void interact(Toon toon) {
-
+        System.out.println("Attack stuff");
     }
 
-    @Override
-    public Toon fight(Toon toon) {
-        return null;
-    }
-
-    @Override
-    public Toon defend(Toon toon) {
-        return null;
-    }
-
-    @Override
-    public Toon fly(Toon toon) {
-        return null;
-    }
+//    @Override
+//    public Toon fight(Toon toon) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Toon defend(Toon toon) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Toon fly(Toon toon) {
+//        return null;
+//    }
 
     // toString
     @Override

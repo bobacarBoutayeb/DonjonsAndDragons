@@ -17,20 +17,21 @@ public abstract class EquipmentDefensive implements Interact {
     }
     @Override
     public void interact(Toon toon) {
-
+        System.out.println("Je suis un equipement defensif");
+        System.out.println("J'interagis avec " + toon);
     }
-    @Override
-    public Toon fight(Toon toon) {
-        return null;
-    }
-    @Override
-    public Toon defend(Toon toon) {
-        return null;
-    }
-    @Override
-    public Toon fly(Toon toon) {
-        return null;
-    }
+//    @Override
+//    public Toon fight(Toon toon) {
+//        return null;
+//    }
+//    @Override
+//    public Toon defend(Toon toon) {
+//        return null;
+//    }
+//    @Override
+//    public Toon fly(Toon toon) {
+//        return null;
+//    }
 
     //toString
     @Override
