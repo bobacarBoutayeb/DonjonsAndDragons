@@ -36,8 +36,8 @@ public abstract class EquipmentDefensive implements Interact {
     @Override
     public String toString() {
         return "EquipmentDefensive{" +
-                ", name='" + name + '\'' +
-                ", defense=" + defense +
+                "Name:'" + name + '\'' +
+                ", Defense:" + defense +
                 '}';
     }
 }

@@ -11,6 +11,12 @@ public abstract class Toon implements Interact {
     protected int attack;
     protected EquipmentDefensive defStuff;
     protected int health;
+
+    // Constructors
+
+    public Toon(){
+        // Construct
+    }
     public Toon(int attack, int health){
         this.attack = attack;
         this.health = health;

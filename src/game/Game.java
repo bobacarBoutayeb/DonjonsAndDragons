@@ -30,11 +30,11 @@ public class Game {
         }
     }
     private boolean finishedGame() {
-        System.out.println("Finished Game");
+        System.out.println("Finished Game State");
         return true;
     }
     private boolean wasted() {
-        System.out.println("Wasted !");
+        System.out.println("Wasted ! State");
         return true;
     }
     public boolean welcomeGame(){
@@ -45,7 +45,7 @@ public class Game {
         };
     }
     public boolean gameSetup(){
-        board.initBoard();
+        this.board.initBoard();
         customiseDefaultPlayer();
         beforeStartedGame();
         return false; // we don't wanna start another start game menu
@@ -114,8 +114,6 @@ public class Game {
     public boolean startGame() {
         this.menu.startGame();
         this.turn = 1;
-        // Todo Setting up the game
-        // boardSettingPlayerPosition(this.player);
         this.states = GameStates.PLAYING;
 
         return false;
@@ -142,7 +140,7 @@ public class Game {
         this.menu.showPlayerPosition(this.character);
         int newPosition = this.character.getPosition() + rollingDiceForMoving();
         this.character.setPosition(newPosition);
-        this.board
+        System.out.println(" What is here? " + this.board.getCells().get(newPosition));
         this.menu.showPlayerPosition(this.character);
         }
     public int rollingDiceForMoving(){

@@ -1,22 +1,36 @@
 package game;
 
+import character.pnj.Dragon;
 import character.pnj.Ennemy;
-import character.stuff.Atk.Spell;
-import character.stuff.Def.Heal;
-import character.stuff.EquipmentDefensive;
-import character.stuff.EquipmentOffensive;
+import character.pnj.Goblin;
+import character.pnj.Wizard;
+import character.stuff.Atk.*;
+import character.stuff.Def.BigPotion;
+import character.stuff.Def.RegularPotion;
+import character.stuff.Def.Shield;
 import interactions.Interact;
 
 import java.util.ArrayList;
 
 public class Board {
-    protected ArrayList<Interact> board = new ArrayList<>();
+    protected ArrayList<Interact> cells = new ArrayList<>();
     protected void initBoard() {
-        board.add(0,null);
-        board.add(1, new Ennemy());
-        board.add(2, new Spell());
-        board.add(3, new Heal());
+        cells.add(0,null);
+        cells.add(1, new Ennemy());
+        cells.add(2, new Spell());
+        cells.add(3, new Shield());
+        cells.add(4, new Dragon());
+        cells.add(5, new Wizard());
+        cells.add(6, new Goblin());
+        cells.add(7, new Mace());
+        cells.add(8, new Sword());
+        cells.add(9, new Lightning());
+        cells.add(10, new Fireball());
+        cells.add(11, new RegularPotion());
+        cells.add(12, new BigPotion());
     }
 
-    protected getBoard
+    protected ArrayList getCells() {
+        return this.cells;
+    }
 }
