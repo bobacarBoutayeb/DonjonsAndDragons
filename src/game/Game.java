@@ -3,6 +3,7 @@ package game;
 import character.Toon;
 import character.hero.Warrior;
 import character.hero.Wizard;
+import character.pnj.Ennemy;
 
 public class Game {
     private int diceMax = 1;
@@ -51,18 +52,17 @@ public class Game {
         return false; // we don't wanna start another start game menu
     }
     public void beforeStartedGame() {
-        boolean reboucle =
-                switch(this.menu.menuBeforeStarting()) {
-                    case "1" -> startGame();
-                    case "2" -> this.menu.playerStatsMenu(this.character);
-                    case "3" -> this.menu.playerStatsMenuModify(this.character);
-                    case "4" -> welcomeGame();
-                    case "5" -> quitGame();
-                    default -> false;
-                };
-
-        if (reboucle){
-            beforeStartedGame();
+        boolean reboucle = true;
+        while (reboucle) {
+            reboucle =
+                    switch (this.menu.menuBeforeStarting()) {
+                        case "1" -> startGame();
+                        case "2" -> this.menu.playerStatsMenu(this.character);
+                        case "3" -> this.menu.playerStatsMenuModify(this.character);
+                        case "4" -> welcomeGame();
+                        case "5" -> quitGame();
+                        default -> false;
+                    };
         }
     }
     public void startedGame() {
@@ -141,8 +141,16 @@ public class Game {
         int newPosition = this.character.getPosition() + rollingDiceForMoving();
         this.character.setPosition(newPosition);
         System.out.println(" What is here? " + this.board.getCell(newPosition));
-        System.out.println("Event: ");
-        this.board.getCell(newPosition).interact(this.character);
+        System.out.println(" Match type Ennemy? ");
+        System.out.println(this.board.getCell(newPosition) instanceof Ennemy);
+        System.out.println(" Event: ");
+        System.out.println(this.character);
+        //TODO éliminer besoin du getCell via une méthode dans Board
+        this.board.getCell(newPosition).interactionWithCase(this.character);
+        if (this.board.getCell(newPosition) instanceof Ennemy){
+            this.character.fighterEngage(this.character);
+        }
+        System.out.println(this.character);
         this.menu.showPlayerPosition(this.character);
         }
     public int rollingDiceForMoving(){

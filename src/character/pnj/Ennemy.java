@@ -1,11 +1,10 @@
 package character.pnj;
 
 import character.Toon;
-import interactions.Interact;
 
-public class Ennemy extends Toon implements Interact {
+public abstract class Ennemy extends Toon {
     @Override
-    public void interact(Toon toon) {
+    public void interactionWithCase(Toon toon) {
         System.out.println("Ennemy vs " + toon);
     }
 //    @Override

@@ -1,9 +1,9 @@
 package character.stuff;
 
 import character.Toon;
-import interactions.Interact;
+import game.Case;
 
-public abstract class EquipmentDefensive implements Interact {
+public abstract class EquipmentDefensive implements Case {
 
     //Attributs
     protected String name;
@@ -16,7 +16,7 @@ public abstract class EquipmentDefensive implements Interact {
         this.defense = defense;
     }
     @Override
-    public void interact(Toon toon) {
+    public void interactionWithCase(Toon toon) {
         System.out.println("Je suis un equipement defensif");
         System.out.println("J'interagis avec " + toon);
     }

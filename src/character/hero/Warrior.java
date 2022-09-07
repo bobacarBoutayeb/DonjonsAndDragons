@@ -1,7 +1,6 @@
 package character.hero;
 
 import character.Toon;
-import interactions.Interact;
 
 public class Warrior extends Toon{
 

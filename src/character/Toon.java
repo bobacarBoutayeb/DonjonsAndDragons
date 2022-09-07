@@ -2,34 +2,39 @@ package character;
 
 import character.stuff.EquipmentDefensive;
 import character.stuff.EquipmentOffensive;
-import interactions.Interact;
+import game.Case;
+import interactions.Fighter;
 
 /**
  * Base for each characters in the game
  */
-public abstract class Toon implements Interact {
+public abstract class Toon implements Case, Fighter {
     /**
      * String name - Name of the toon
-     * <p>
-     * int position - Position of the toon
-     * <p>
-     * EquipmentOffensive atkStuff - Offensive stuff for toon
-     * <p>
-     * int attack - Attack of the toon
-     * <p>
-     * EquipmentDefensive defStuff - Defensive stuff for toon
-     * <p>
-     * int health - Health of the toon
      */
     protected String name;
+    /**
+     * int position - Position of the toon, 0 by default for the beginning
+     */
     protected int position = 0;
+    /**
+     * EquipmentOffensive atkStuff - Offensive stuff for toon 
+     */
     protected EquipmentOffensive atkStuff;
+    /**
+     * int attack - Attack of the toon
+     */
     protected int attack;
+    /**
+     * EquipmentDefensive defStuff - Defensive stuff for toon
+     */
     protected EquipmentDefensive defStuff;
+    /**
+     * int health - Health of the toon
+     */
     protected int health;
 
     // Constructors
-
     /**
      * Toon construct
      */
@@ -47,36 +52,63 @@ public abstract class Toon implements Interact {
     // Methods
     /**
      * Static method for getting random attack and health in the good range with two parameters
+     * @param minStat - Low limit
+     * @param maxStat - Max limit
+     * @return randomStat
      */
     public static int randomStat(int minStat, int maxStat){
-        int rangeMinMaxHealth = maxStat - minStat;
-        return (int) (((Math.random() * (1000000)) % rangeMinMaxHealth) + minStat);
+        int rangeMinMaxStat = maxStat - minStat;
+        return (int) (((Math.random() * (1000000)) % rangeMinMaxStat) + minStat);
     }
+
     /**
-     * Toon contract for interaction with a toon
+     * Toon contracts for interaction with a toon
+     */
+
+    /**
+     * @param toon - Interaction with a Toon.
      */
     @Override
-    public void interact(Toon toon) {
+    public void interactionWithCase(Toon toon) {
     }
-//    @Override
-//    public Toon fight(Toon toon) {
-//        System.out.println("Fight!");
-//
-//        toon.health = toon.health - this.attack;
-//        return toon;
-//    }
-//    @Override
-//    public Toon defend(Toon toon) {
-//        System.out.println("Esquive");
-//
-//        this.health = this.health - toon.attack;
-//        return this;
-//    }
-//    @Override
-//    public Toon fly(Toon toon) {
-//        System.out.println("Run Forest, run!");
-//        return toon;
-//    }
+
+    /**
+     * Fighter contracts with a toon
+     */
+    /**
+     * Engage fight and bless the Toon
+     * @param toon - Toon the instance face
+     * @return toon updated after Attack
+     */
+    @Override
+    public Toon fighterEngage(Toon toon) {
+        System.out.println("Fight!");
+        toon.health = toon.health - this.attack;
+        return toon;
+    }
+    /**
+     * Defense against a Toon
+     * @param toon - Toon that attack the actual instance
+     * @return toon updated after Defense
+     */
+    @Override
+    public Toon fighterDefend(Toon toon) {
+        System.out.println("Clench your teeth and survive !");
+        this.health = this.health - toon.attack;
+        return this;
+    }
+    /**
+     * Escape fight against the Toon
+     * @param toon - Toon the instance face
+     * @return toon updated
+     */
+    @Override
+    public Toon fighterEscape(Toon toon) {
+        System.out.println("Run Forest, run!");
+        return toon;
+    }
+
+    // Getters & Setters
     public String getName() {
         return name;
     }

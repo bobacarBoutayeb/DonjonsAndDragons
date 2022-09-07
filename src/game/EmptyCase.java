@@ -1,11 +1,10 @@
 package game;
 
 import character.Toon;
-import interactions.Interact;
 
-public class EmptyCase implements Interact {
+public class EmptyCase implements Case {
     @Override
-    public void interact(Toon toon) {
-        System.out.println("I'm empty lucky toon.");
+    public void interactionWithCase(Toon toon) {
+        System.out.println(" I'm empty, lucky toon.");
     }
 }

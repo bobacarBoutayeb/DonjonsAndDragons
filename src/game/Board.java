@@ -3,13 +3,12 @@ package game;
 import character.pnj.Dragon;
 import character.pnj.Goblin;
 import character.stuff.Def.RegularPotion;
-import interactions.Interact;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Board {
-    protected ArrayList<Interact> cells = new ArrayList<>();
+    protected ArrayList<Case> cells = new ArrayList<>();
     protected void initBoard() {
         for (int caseIndex = 0; caseIndex < 65; caseIndex++){
             switch (caseIndex) {
@@ -21,7 +20,17 @@ public class Board {
         }
         Collections.shuffle(cells); // 7.3 random
     }
-    protected Interact getCell(int index) {
+/*
+    public void makeInteraction(Toon toon, int pos) {
+        if(pos < cells.size()){
+            cells.get(pos).interactionWithCase(toon);
+        }
+    }*/
+    protected Case getCell(int index) {
         return this.cells.get(index);
     }
+
+//    protected Case contentCellPlayer(Case casePlayer){
+////        casePlayer =
+//    }
 }
