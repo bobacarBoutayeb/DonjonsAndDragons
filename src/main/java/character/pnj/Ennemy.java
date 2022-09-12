@@ -7,20 +7,6 @@ public abstract class Ennemy extends Toon {
     public void interactionWithCase(Toon toon) {
         System.out.println("Ennemy vs " + toon);
     }
-//    @Override
-//    public Toon fight(Toon toon) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Toon defend(Toon toon) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Toon fly(Toon toon) {
-//        return null;
-//    }
 
     @Override
     public String toString() {

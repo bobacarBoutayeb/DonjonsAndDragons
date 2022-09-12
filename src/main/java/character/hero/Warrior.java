@@ -10,10 +10,7 @@ public class Warrior extends Toon{
     private static final int maxAtkWarrior = 10;
 
     public Warrior() {
-        super(
-                randomStat(minAtkWarrior,maxAtkWarrior),
-                randomStat(minHealthWarrior, maxHealthWarrior)
-                );
+                super(minAtkWarrior,maxAtkWarrior, minHealthWarrior, maxHealthWarrior);
     }
     @Override
     public String toString() {

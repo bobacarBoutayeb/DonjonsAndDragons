@@ -103,7 +103,6 @@ public class Game {
                 case "2" -> new Wizard();
                 default -> null;
             };
-
         /* Check la branche false d'un if:
 
         Objects.requireNonNull(this.character); Public

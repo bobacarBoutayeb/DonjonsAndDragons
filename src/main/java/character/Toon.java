@@ -48,6 +48,10 @@ public abstract class Toon implements Case, Fighter {
         this.attack = attack;
         this.health = health;
     }
+    public Toon(int minAttack, int maxAttack, int minHealth, int maxHealth){
+        this.attack = randomStat(minAttack,maxAttack);
+        this.health = randomStat(minHealth,maxHealth);
+    }
 
     // Methods
     /**
@@ -56,7 +60,7 @@ public abstract class Toon implements Case, Fighter {
      * @param maxStat - Max limit
      * @return randomStat
      */
-    public static int randomStat(int minStat, int maxStat){
+    private int randomStat(int minStat, int maxStat){
         int rangeMinMaxStat = maxStat - minStat;
         return (int) (((Math.random() * (1000000)) % rangeMinMaxStat) + minStat);
     }

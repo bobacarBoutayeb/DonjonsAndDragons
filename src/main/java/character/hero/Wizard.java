@@ -10,10 +10,7 @@ public class Wizard extends Toon {
     private static final int maxAtkWizard = 15;
 
     public Wizard() {
-        super(
-                randomStat(minAtkWizard,maxAtkWizard),
-                randomStat(minHealthWizard, maxHealthWizard)
-                );
+        super(minAtkWizard,maxAtkWizard, minHealthWizard, maxHealthWizard);
     }
     @Override
     public String toString() {
